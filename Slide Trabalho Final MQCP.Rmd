@@ -1,0 +1,65 @@
+---
+title: "Trabalho Final - MQCP"
+author: "Amanda Lopes; Ana Vaz; Bárbara Maia; Isabel Eirado"
+date: "Dezembro/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r ativando pacotes, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(readxl)
+library(rmarkdown)
+```
+
+## Contexto
+
+- Justificativa
+
+## Objeto
+
+- A mudança constitucional no federalismo estadunidense
+
+## Objetivos
+
+- Principal: Analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses
+
+- Específicos:
+1. Mudanças constitucionais a partir das variações das palavras totais das constituições vigentes
+2. Verificar a variação entre o número de constituições implementadas ao longo do tempo
+3. Mudanças constitucionais a partir da temática de direitos humanos 
+4. Mudanças constitucionais a partir da temática de discriminação 
+5. Mudança proporcional dos poderes nas constituições 
+
+## Preparando a análise
+
+```{r ativando pacotes, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(ggpubr)
+library(devtools)
+devtools::install_github("cardiomoon/webr")
+library(webr)
+```
+
+```{r importando os dados, echo=TRUE}
+state_const <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRADUACAO/DISCIPLINAS/3_SEM/MQCP/Dados/US-State_Constitutions_Dataset_1776-2017.xlsx")
+States_and_Abbreviations <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRADUACAO/DISCIPLINAS/3_SEM/MQCP/Dados/States and Abbreviations.xlsx")
+```
+
+## Método
+
+- Informar as fontes usadas pela autora que construiu os dados e as formas como ela os organizou
+
+```{r, echo = TRUE}
+
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+

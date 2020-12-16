@@ -1,0 +1,59 @@
+---
+title: "Trabalho Final - MQCP"
+author: "Amanda Lopes; Ana Vaz; Bárbara Maia; Isabel Eirado"
+date: "Dezembro/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r ativando pacotes, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(readxl)
+library(rmarkdown)
+```
+
+# *Resumo:*
+
+# *Introdução*
+
+- Objeto: A mudança constitucional no federalismo norte-americano
+
+- Objetivo principal: Analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses
+
+- Objetivos específicos: 
+1. Mudanças constitucionais a partir das variações das palavras totais das constituições vigentes
+2. Verificar a variação entre o número de constituições implementadas ao longo do tempo
+
+- Contextualização (justificativa)
+
+- Pergunta:
+
+## *Preparando a análise*
+
+```{r ativando pacotes, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(ggpubr)
+library(devtools)
+devtools::install_github("cardiomoon/webr")
+library(webr)
+```
+
+```{r importando os dados, echo=TRUE}
+state_const <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRADUACAO/DISCIPLINAS/3_SEM/MQCP/Dados/US-State_Constitutions_Dataset_1776-2017.xlsx")
+States_and_Abbreviations <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRADUACAO/DISCIPLINAS/3_SEM/MQCP/Dados/States and Abbreviations.xlsx")
+```
+
+# *Método*
+
+- Informar as fontes usadas pela autora que construiu os dados e as formas como ela organizou os dados
+
+# *Resultados*
+
+# *Conclusões*
+
+- Alabama outsider
+- Necessidade de análise qualitativa
+
