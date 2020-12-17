@@ -91,7 +91,28 @@ state_cons_sources <- read_excel("state_constitutions_sources.xlsx")
 state_cons_sources
 ```
 
-- Dadas as fontes utilizadas para elaboração da base de dados, 
+- Dadas as fontes utilizadas para elaboração da base de dados, utilizamos a função glimpse para conhecer melhor os dados com os quais estamos lidando.
+```{r paged.print=TRUE}
+glimpse(state_const)
+```
+- Trabalhamos, portanto, com o nome dos estados, variável categórica, e, variáveis numéricas, que indicam desde o ano em que a constituição foi promulgada (constitution_year) até o número de palavras dedicadas a determinado elementoem cada constituição (exemplo: número de palavras referentes a declaração de direitos em determinada constituição - declaration_rights).
+
+# *Análise*
+
+## Agregando a lista de abreviações à base de dados
+```{r}
+state_const <- state_const %>%  left_join(States_and_Abbreviations, constituicoes_poderes, by = "state") #adicionando a abreviação dos estados para facilitar a manipulação e visualização dos dados
+
+```
+
+
+## Análise das constituições atuais a partir do total de palavras
+- Com o objetivo de analisar as constituições atuais a partir do total de palavras e dos anos em que foram promulgadas, iremos manipular os dados, selecionando e filtrando as informações de interesse a partir da base de dados, e, em seguida, as colunas de interesse usando o pacote dplyr. 
+```{r}
+state_const_current_total_words <- state_const %>% select(state, constitution_year, current_constitution, total_words) %>% #selecionando as variaveis de interesse - nome do estado, ano da constituição, constituição atual e total de palavras
+  filter(current_constitution == 1) #filtrando apenas as constituições vigentes
+```
+
 
 # *Resultados*
 
