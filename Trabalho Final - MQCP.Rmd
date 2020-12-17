@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r ativando pacotes, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
-library(readxl)
+library(readr)
 library(rmarkdown)
 ```
 
@@ -22,13 +22,18 @@ with the circumstances, institutions must advance also, and keep pace with the t
 
 # *Resumo:*
 
-O objetivo deste trabalho é revistar o Banco de Dados **"US State Constitutions Dataset"**, criado por Julia Gervaise-Rubicam Clouse (CLOUSE, 2019), e propor um novo olhar e análises aos dados ali apresentados. O dataset converte textos constitucionais (historicos e atuais) dos estados dos EUA para dados quantificáveis utilizando-se da categorização destes textos. A ideia do trabalho de Clouse (2019) é analisar a evolução das ideias e prioridades políticas nos 50 estados do país, e analisar a mudança constitucional dos estados ao longo do tempo. Conclui-se que há um campo fértil para comparação entre as constituições estaduais e se observam tendências gerais nos tópicos de foco dos estados. O teste de hipótese realizado demonstra que as constituições atuais são maiores e mais abrangentes que as constituições históricas, e foi possível fazer algumas relações entre as variáveis. Pontua-se, por fim, que este tipo de análise se beneficiaria de uma análise qualitativa em profundidade, a fim de melhor avaliar as categorias analíticas e tirar conclusões combinadas entre dados qualitativos e quantitativos.
+O objetivo deste trabalho é revistar o Banco de Dados **"US State Constitutions Dataset"**, criado por Julia Gervaise-Rubicam Clouse (CLOUSE, 2019), e propor um novo olhar e análises aos dados ali apresentados. O dataset converte textos constitucionais (historicos e atuais) dos estados dos EUA para dados quantificáveis utilizando-se da categorização destes textos. A ideia do trabalho de Clouse (2019) é analisar a evolução das ideias e prioridades políticas nos 50 estados do país, e analisar a mudança constitucional dos estados ao longo do tempo. Utilizando-se dessa base de dados, este trabalho propõe-se a analisar as mudanças constitucionais a partir do número de palavras totais das constituições e das regras formais que abarcam os três Poderes - Executivo, Legislativo e Judiciário. Conclui-se que há um campo fértil para comparação entre as constituições estaduais e se observam tendências gerais nos tópicos de foco dos estados. O teste de hipótese realizado demonstra que as constituições atuais são maiores e mais abrangentes que as constituições históricas, e foi possível fazer algumas relações entre as variáveis. Pontua-se, por fim, que este tipo de análise se beneficiaria de uma análise qualitativa em profundidade, a fim de melhor avaliar as categorias analíticas e tirar conclusões combinadas entre dados qualitativos e quantitativos.
+
+<style>
+body {
+text-align: justify}
+</style>
 
 # *Introdução*
 
 - Objeto: Mudança constitucional no federalismo norte-americano
 
-- Objetivo principal: Analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses
+- Objetivo principal: Analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses a partir das mudanças constitucionais
 
 - Objetivos específicos: 
 1. Observar mudanças constitucionais a partir das variações das palavras totais das constituições vigentes
@@ -38,16 +43,23 @@ O objetivo deste trabalho é revistar o Banco de Dados **"US State Constitutions
 
 - Contextualização (justificativa)
 
-A organização do federalismo estadunidense dá às unidades subnacionais considerado potencial para inovações constitucionais e experimentação política ("espaço constitucional"), inclusive em comparação à maior parte de outras federações (BURGESS, TARR e MARKO, 2004).
-Essa possibilidade de mudança foi utilizada pelos estados de maneira frequente - seja pela substituição completa, seja pelo emendamento das Cartas vigentes. Diferentemente do que ocorre com a Constituição Federal, emendas e mudanças nas Constituições Estaduais são relativamente fáceis, além de congregarem uma gama de atores, tendo um caráter popular mais visível, dado que são propostas ou votadas pela população (ACIR, 1989). Além disto, Woodward-Burns (2007) irá apontar que é justamente a revisão constitucional estadual que resolve as controvérsias constitucionais nacionais, evitando emendas constitucional federais e atuando na resulução de conflitos, em escala nacional, entre os poderes. De fato, enquanto em nível federal, somente uma Constituição foi raitificada, com 27 emendas, os estados Americanos tem uma larga produção constitucional, com 153 constituições adotadas^1^ ^1[Aqui, utilizamos a contagem feita por Clouse (2019). É importante apontar que sua contagem, conforme será explicitados nas notas metodológicas, diverge da contagem de outros autores, como o Book of States (2012), que aponta para a exitência de 145], sendo que o número de emendas, até 2013, chegava a quase 10000 (TARR, 2016). 
-O que está por trás da frequência das alterações, e é particularmente o objeto de interesse aqui são os tipos de mudanças propostos pelas novas constituições. 
-As constituições estaduais tendem a ser mais longas que a Constituição Federal por serem mais detalhadas no que tange as relações cotidianas entre o governo e a população dos estados (ACIR, 1989). Além disso, boa parte das constituições estaduais irá abordar tópicos não abordados na CF, como Governo Local e Educação (TARR, 2016). Mas, em grande medida, representam escolhas políticas dos próprios estado, as necessidades ali encontradas e filosofias de governo próprias (ACIR, 1989).
+A organização do federalismo estadunidense dá às unidades subnacionais considerado potencial para inovações constitucionais e experimentação política ("espaço constitucional"), inclusive em comparação à maior parte de outras federações (BURGESS, TARR e MARKO, 2004).Essa possibilidade de mudança foi utilizada pelos estados de maneira frequente - seja pela substituição completa, seja pelo emendamento das Cartas vigentes. Diferentemente do que ocorre com a Constituição Federal, emendas e mudanças nas Constituições Estaduais são relativamente fáceis, além de congregarem uma gama de atores, tendo um caráter popular mais visível, dado que são propostas ou votadas pela população (ACIR, 1989). 
+
+Além disto, Woodward-Burns (2007) irá apontar que é justamente a revisão constitucional estadual que resolve as controvérsias constitucionais nacionais, evitando emendas nas constitucional federais e atuando na resulução de conflitos, em escala nacional, entre os poderes. De fato, enquanto em nível federal, somente uma Constituição foi ratificada, com 27 emendas, os estados Americanos tem uma larga produção constitucional, com 153 constituições adotadas^1^ ^1[Aqui, utilizamos a contagem feita por Clouse (2019). É importante apontar que sua contagem, conforme será explicitados nas notas metodológicas, diverge da contagem de outros autores, como o Book of States (2012), que aponta para a exitência de 145], sendo que o número de emendas, até 2013, chegava a quase 10.000 (TARR, 2016).
+
+O que está por trás da frequência das alterações, e é particularmente o objeto de interesse aqui, são os tipos de mudanças propostos pelas novas constituições. As constituições estaduais tendem a ser mais longas que a Constituição Federal por serem mais detalhadas no que tange as relações cotidianas entre o governo e a população dos estados (ACIR, 1989). Além disso, boa parte das constituições estaduais irá abordar tópicos não abordados na CF, como Governo Local e Educação (TARR, 2016). Mas, em grande medida, representam escolhas políticas dos próprios estado, as necessidades ali encontradas e filosofias de governo próprias (ACIR, 1989).
+
 Assim, se por um lado se entende que as Constituições estaduais completam e balanceiam a Constituição Federal, e, portanto, são essenciais para o funcionamento do sistema federativo estadunidense, por outro a frequência das mudanças das constituições representa um lugar fértil para entender:
-a) de que forma as ideias políticas e prioridades políticas vem evoluindo nos 50 estados;
-b) de que forma os estados vem se adaptando a necessidades de novas ações políticas sociais, domésticas e externas.
+a) de que forma as ideias e prioridades políticas vêm evoluindo nos 50 estados;
+b) de que forma os estados vêm se adaptando às necessidades de novas ações políticas, sociais, domésticas e externas.
 De modo, geral, portanto, observa-se que a importância da compreensão das constituições subnacionais está justamente no fato de que a maior parte das revisões constitucionais nos EUA acontecem em nível estadual. Para além deste fato, reforça-se que a compreensão das instituicionais estadunidenses e do sistema federalista do país se apoiam, largamente, também neste nível.
 
 - Pergunta: É possível observar padrões de mudança nas constituições estaduais dos 50 estados americanos ao longo do tempo?
+
+<style>
+body {
+text-align: justify}
+</style>
 
 ## *Preparando a análise*
 
@@ -61,8 +73,8 @@ library(webr)
 ```
 
 ```{r importando os dados, echo=TRUE}
-state_const <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRADUACAO/DISCIPLINAS/3_SEM/MQCP/Dados/US-State_Constitutions_Dataset_1776-2017.xlsx")
-States_and_Abbreviations <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRADUACAO/DISCIPLINAS/3_SEM/MQCP/Dados/States and Abbreviations.xlsx")
+state_const <- read_excel("US-State_Constitutions_Dataset_1776-2017.xlsx")
+States_and_Abbreviations <- read_excel("States and Abbreviations.xlsx")
 ```
 
 # *Método*
@@ -77,3 +89,13 @@ States_and_Abbreviations <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRA
 - Necessidade de análise qualitativa
 - É preciso englobar, para além da quantidade de número de palavras, outros aspectos institucionais, legais e sociais que permitam melhor compreender o processo de mudança constitucional nos 50 estados.
 
+# *Referências*
+BURGESS, Michael D.; TARR, G. Alan; MARKO, Josef (Ed.). Constitutional dynamics in federal systems: sub-national perspectives. Montreal: McGill-Queen’s University Press, 2012
+
+CLOUSE, J.G. (2019). The U.S. State Constitutions Dataset, 1776-2017 (Feb 2019 Version).
+
+CLOUSE, Julia Gervaise-Rubicam. Converting the Texts of the US State Constitutions into Quantifiable Data: A Text Analytics Project. 2019. Tese de Doutorado. George Mason University.
+
+TARR, G. Alan. Explaining state constitutional changes. Revista de Investigações Constitucionais, v. 3, n. 2, p. 9-32, 2016.
+
+WOODWARD-BURNS, Robinson. American Reconstitution: How The States Stabilize American Constitutional Development. 2017.
