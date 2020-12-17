@@ -1,5 +1,5 @@
 ---
-title: "Trabalho Final - MQCP"
+title: "U.S. STATE CONSTITUTIONS WORD COUNT: Revisiting Clouse's Dataset. Trabalho Final - MQCP"
 author: "Amanda Lopes; Ana Vaz; Bárbara Maia; Isabel Eirado"
 date: "Dezembro/2020"
 output: html_document
@@ -16,19 +16,34 @@ library(rmarkdown)
 
 # *Resumo:*
 
+O objetivo deste trabalho é revistar o Banco de Dados **"US State Constitutions Dataset"**, criado por Julia Gervaise-Rubicam Clouse (CLOUSE, 2019), e propor um novo olhar e análises aos dados ali apresentados. O dataset converte textos constitucionais (historicos e atuais) dos estados dos EUA para dados quantificáveis utilizando-se da categorização destes textos. A ideia do trabalho de Clouse (2019) é analisar a evolução das ideias e prioridades políticas nos 50 estados do país, e analisar a mudança constitucional dos estados ao longo do tempo. Conclui-se que há um campo fértil para comparação entre as constituições estaduais e se observam tendências gerais nos tópicos de foco dos estados. O teste de hipótese realizado demonstra que as constituições atuais são maiores e mais abrangentes que as constituições históricas, e foi possível fazer algumas relações entre as variáveis. Pontua-se, por fim, que este tipo de análise se beneficiaria de uma análise qualitativa em profundidade, a fim de melhor avaliar as categorias analíticas e tirar conclusões combinadas entre dados qualitativos e quantitativos.
+
 # *Introdução*
 
-- Objeto: A mudança constitucional no federalismo norte-americano
+- Objeto: Mudança constitucional no federalismo norte-americano
 
 - Objetivo principal: Analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses
 
 - Objetivos específicos: 
-1. Mudanças constitucionais a partir das variações das palavras totais das constituições vigentes
+1. Observar mudanças constitucionais a partir das variações das palavras totais das constituições vigentes
 2. Verificar a variação entre o número de constituições implementadas ao longo do tempo
+3. Observar, a partir de um índice, a mudança proporcional entre os três poderes nas constituições estaduais
+4. Demonstrar padrões de mudança constituicional ao longo do tempo
 
 - Contextualização (justificativa)
 
-- Pergunta:
+A organização do federalismo estadunidense dá às unidades subnacionais considerado potencial para inovações constitucionais e experimentação política ("espaço constitucional"), inclusive em comparação à maior parte de outras federações (BURGESS, TARR e MARKO, 2004).
+Diferentemente do que ocorre com a Constituição Federal, emendas e mudanças nas Constituições Estaduais são relativamente fáceis, além de congregarem uma gama de atores, tendo um caráter popular mais visível, dado que são propostas ou votadas pela população (ACIR, 1989).
+Essa possibilidade de mudança foi utilizada pelos estados de maneira frequente - seja pela substituição completa, seja pelo emendamento das Cartas vigentes.
+O que está por trás da frequência das alterações, e é particularmente o objeto de interesse aqui são os tipos de mudanças propostos pelas novas constituições. 
+As constituições estaduais tendem a ser mais longas que a Constituição Federal por serem mais detalhadas no que tange as relações cotidianas entre o governo e a população dos estados (ACIR, 1989). Além disso, boa parte das constituições estaduais irá abordar tópicos não abordados na CF, como Governo Local e Educação (TARR, x). Mas, em grande medida, representam escolhas políticas dos próprios estado, as necessidades ali encontradas e filosofias de governo próprias (ACIR, 1989).
+Assim, se por um lado se entende que as Constituições estaduais completam e balanceiam a Constituição Federal, e, portanto, são essenciais para o funcionamento do sistema federativo estadunidense, por outro a frequência das mudanças das constituições representa um lugar fértil para entender:
+a) de que forma as ideias políticas e prioridades políticas vem evoluindo nos 50 estados;
+b) de que forma os estados vem se adaptando a necessidades de novas ações políticas sociais, domésticas e externas.
+
+(ESTOU PROCURANDO A JUSTIFICATIVA DA CF ESTÁVEL - E JÁ ESTÁ ENORME, ME PAREM PELO AMOR DE DEUS).
+
+- Pergunta: É possível observar padrões de mudnaça nas constituições estaduais dos 50 estados americanos ao longo do tempo?
 
 ## *Preparando a análise*
 
