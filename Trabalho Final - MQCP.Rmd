@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r ativando pacotes, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
-library(readr)
+library(readxl)
 library(rmarkdown)
 ```
 
@@ -47,12 +47,13 @@ A organização do federalismo estadunidense dá às unidades subnacionais consi
 
 Além disto, Woodward-Burns (2007) irá apontar que é justamente a revisão constitucional estadual que resolve as controvérsias constitucionais nacionais, evitando emendas nas constitucional federais e atuando na resulução de conflitos, em escala nacional, entre os poderes. De fato, enquanto em nível federal, somente uma Constituição foi ratificada, com 27 emendas, os estados Americanos tem uma larga produção constitucional, com 153 constituições adotadas^1^ ^1[Aqui, utilizamos a contagem feita por Clouse (2019). É importante apontar que sua contagem, conforme será explicitados nas notas metodológicas, diverge da contagem de outros autores, como o Book of States (2012), que aponta para a exitência de 145], sendo que o número de emendas, até 2013, chegava a quase 10.000 (TARR, 2016).
 
-O que está por trás da frequência das alterações, e é particularmente o objeto de interesse aqui, são os tipos de mudanças propostos pelas novas constituições. As constituições estaduais tendem a ser mais longas que a Constituição Federal por serem mais detalhadas no que tange as relações cotidianas entre o governo e a população dos estados (ACIR, 1989). Além disso, boa parte das constituições estaduais irá abordar tópicos não abordados na CF, como Governo Local e Educação (TARR, 2016). Mas, em grande medida, representam escolhas políticas dos próprios estado, as necessidades ali encontradas e filosofias de governo próprias (ACIR, 1989).
+O que está por trás da frequência das alterações, e é particularmente o objeto de interesse aqui, são os tipos de mudanças propostos pelas novas constituições. As constituições estaduais tendem a ser mais longas que a Constituição Federal por serem mais detalhadas no que tange as relações cotidianas entre o governo e a população dos estados (ACIR, 1989). Além disso, boa parte das constituições estaduais irá abordar tópicos não abordados na CF, como Governo Local e Educação (TARR, 2016). Mas, em grande medida, representam escolhas políticas dos próprios estados, as necessidades ali encontradas e filosofias de governo próprias (ACIR, 1989).
 
 Assim, se por um lado se entende que as Constituições estaduais completam e balanceiam a Constituição Federal, e, portanto, são essenciais para o funcionamento do sistema federativo estadunidense, por outro a frequência das mudanças das constituições representa um lugar fértil para entender:
 a) de que forma as ideias e prioridades políticas vêm evoluindo nos 50 estados;
 b) de que forma os estados vêm se adaptando às necessidades de novas ações políticas, sociais, domésticas e externas.
-De modo, geral, portanto, observa-se que a importância da compreensão das constituições subnacionais está justamente no fato de que a maior parte das revisões constitucionais nos EUA acontecem em nível estadual. Para além deste fato, reforça-se que a compreensão das instituicionais estadunidenses e do sistema federalista do país se apoiam, largamente, também neste nível.
+
+De modo, geral, portanto, observa-se que a importância da compreensão das constituições subnacionais está justamente no fato de que a maior parte das revisões constitucionais nos EUA acontecem em nível estadual. Para além deste fato, reforça-se que a compreensão das instituicições estadunidenses e do sistema federalista do país se apoiam, largamente, também neste nível.
 
 - Pergunta: É possível observar padrões de mudança nas constituições estaduais dos 50 estados americanos ao longo do tempo?
 
@@ -63,8 +64,12 @@ text-align: justify}
 
 ## *Preparando a análise*
 
-```{r ativando pacotes, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(rmarkdown)
+library (infer)
 library(tidyverse)
 library(ggpubr)
 library(devtools)
@@ -79,7 +84,14 @@ States_and_Abbreviations <- read_excel("States and Abbreviations.xlsx")
 
 # *Método*
 
-- Informar as fontes usadas pela autora que construiu os dados e as formas como ela organizou os dados
+- Utilizamos a base de dados construída por Julia Clouse, conforme informações e fontes dispostas na planilha apresentada abaixo: 
+```{r paged.print=TRUE}
+state_cons_sources <- read_excel("state_constitutions_sources.xlsx")
+
+state_cons_sources
+```
+
+- Dadas as fontes utilizadas para elaboração da base de dados, 
 
 # *Resultados*
 
