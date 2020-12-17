@@ -75,6 +75,7 @@ library(ggpubr)
 library(devtools)
 devtools::install_github("cardiomoon/webr")
 library(webr)
+library(forcats)
 ```
 
 ```{r importando os dados, echo=TRUE}
@@ -110,28 +111,87 @@ state_const <- state_const %>%  left_join(States_and_Abbreviations, constituicoe
 - Com o objetivo de analisar as constituições atuais a partir do total de palavras e dos anos em que foram promulgadas, iremos manipular os dados, selecionando e filtrando as informações de interesse a partir da base de dados, e, em seguida, as colunas de interesse usando o pacote dplyr. 
 ```{r}
 state_const_current_total_words <- state_const %>% select(state_abrev, constitution_year, current_constitution, total_words) %>% #selecionando as variaveis de interesse - nome do estado, ano da constituição, constituição atual e total de palavras
-  filter(current_constitution == 1) #filtrando apenas as constituições vigentes
+  filter(current_constitution == 1) %>% #filtrando apenas as constituições vigentes
 ```
 
--  A fim de analisar a variação das datas de promulgação das constituições estaduais vigentes, construímos um gráfico de densidade. Optou-se por esse tipo de gráfico por que:
+- Primeiramente, queremos identificar a variação do número de palavras das constituições vigentes em cada Estado. Optou-se por utilizar o tipo de gráfico de pontos (scatter chart) pelos seguintes motivos: 
+1. O objetivo é observar a distribuição do número de palavras nas constituições de cada estado;
+2. Temos duas variáveis em foco - total_word e state - para evidenciar a distribuição de palavras nas constituições dos Estados.
+
+- Por ser um outlier, o Alabama foi excluído do gráfico para não poluir a visualização.
+```{r paged.print=TRUE}
+state_const_current_total_words %>% filter(state_abrev != "AL") %>% #excluindo o Alabama
+  mutate(state_abrev=fct_reorder(state_abrev, total_words)) %>%
+  ggplot(aes(x=state_abrev, y= total_words)) + #definindo os dados a serem projetados nos eixos x e y
+  geom_point(color="red", size=1, fill="red") +#definindo a geometria scatter com cor de contorno e preenchimento vermelhas e o tamanho do preenchimento
+ theme_classic() +  #definindo o tema classico
+  theme(axis.text.x = element_text(angle=90, hjust=1)) #definindo a posição vertical para o eixo x
+```
+
+-  Após identificar os estados com maior e menor número de palavras na constituição vigente, queremos ver se essa distribuição tem alguma relação com as datas em que foram promulgadas. Assim, para observamos a variação das datas de promulgação das constituições estaduais vigentes, construímos um gráfico de densidade. Optou-se por esse tipo de gráfico por que:
 1. O objetivo é observar a distribuição das constituições vigentes por estado ao longo do tempo 
 2. O ano da constituição vigente (constitution_year) é a variável em foco, variável única
 3. Como os Estados Unidos têm muitos estados, totalizando 50, existem muitos "data points" e por isso optou-se pelo histograma em linha, para evidenciar o pico da promulgação de constituições.
 
-```{r}
+```{r paged.print=TRUE}
 state_const_current_total_words %>% ggplot(aes(x=constitution_year)) + # estabelecendo o eixo x - univa variavel que será ano
-  geom_density(color="black", size=1)+ #definindo a cor e o tamanho da linha 
+  geom_density(color="black", size=1)+ #definindo a cor e o tamanho da linha
+  scale_x_continuous() + #definindo os valores a serem expostos no eixo x
   theme_classic() +  #estabelecendo o tema do gráfico para um modelo com fundo branco
   labs(title = "Promulgação de constituições ao longo do tempo",
        x = "Ano de promulgação",
        y = "densidade") #nomeando os eixos
+```
+
+- Após identificar o pico de promulgação das constituições vigentes, segue-se para analisar qual foi a variação do número de palavras das constituições (entre a penúltima e a vigente), considerando o ano da constituição atual, ou seja, quantas palavras foram acrescentadas desde a última constituição. Dado o pico de promulgações em 2016, a análise da variação do número de palavras pode indicar correlações entre o ano e o número de palavras.
+```{r paged.print=TRUE}
+state_const_current_total_words %>% select(constitution_year) %>% head(1) #acessando a data mais antiga de promulgação entre as constituições vigentes 
 
 ```
-- Após identificar o pico de promulgação das constituições vigentes, segue-se para analisar a variação do número de palavras das constituições vigentes em cada Estado, a fim de identificar correlações.
+```{r paged.print=TRUE}
+state_const_current_total_words %>% select(constitution_year) %>% tail(1)
+#acessando a data mais recente de promulgação entre as constituições vigentes
+```
+
+
+
+
+
+Optou-se por utilizar o tipo de gráfico de pontos (scatter chart) pelos seguintes motivos: 
+  ** O objetivo é observar a distribuição do número de palavras nas constituições de cada estado 
+  ** Temos duas variáveis em foco - total_word e state - para evidenciar a distribuição de palavras nas constituições dos Estados
+```{r}
+state_const_current_total_words %>% ggplot(state_constitutions_word_count, aes(x=abv_state, y=total_words)) + #definindo os dados a serem projetados nos eixos x e y
+  geom_point(color="red", size=1, fill="red") +#definindo a geometria scatter com cor de contorno e preenchimento vermelhas e o tamanho do preenchimento
+           scale_y_continuous(breaks = c(5000, 30000, 60000, 80000, 10000, 340000)) + #definindo os valores a serem mostrados no gráfico no eixo y
+ theme_classic() +  #definindo o tema classico
+  theme(axis.text.x = element_text(angle=90, hjust=1)) #definindo a posição vertical para o eixo x
+```
+
 
 # *Resultados*
 
 - A partir das análises, percebe-se que o pico de promulgação de constituições é 2016.
+
+- O primeiro passo foi verificar o número de constituições aprovadas 
+por estado e o ano de aprovação da legislação vigente. 
+```{r}
+state_const$constitution_year <- as.factor(state_const$constitution_year)
+ 
+state_const %>%
+  select(state, n, constitution_year) %>%
+  ggplot(aes(x = n, 
+             y = fct_inorder(state),
+             fill = constitution_year)) + #ao definir o mapping no ggplot, as orientações são globais para todos os outros gráficos que virem a seguir
+  geom_col(alpha = 0.7, width = .65) + 
+  scale_x_continuous(breaks = seq(0,12, 2)) +
+  scale_fill_brewer(palette = "Paired") +
+  ggtitle("Número de Constituições implementadas por cada estado estadunidense") +
+  labs(x = "Número de Constituições aprovadas",
+       y = "Siglas dos estados") +
+  theme_minimal()
+```
+
 
 # *Conclusões*
 
