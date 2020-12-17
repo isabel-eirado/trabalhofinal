@@ -71,4 +71,5 @@ States_and_Abbreviations <- read_xlsx("/Users/AMANDA/OneDrive - unb.br/A_POS-GRA
 
 - Alabama outsider
 - Necessidade de análise qualitativa
+- É preciso englobar, para além da quantidade de número de palavras, outros aspectos institucionais, legais e sociais que permitam melhor compreender o processo de mudança constitucional nos 50 estados.
 
