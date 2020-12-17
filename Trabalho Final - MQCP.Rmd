@@ -97,11 +97,11 @@ glimpse(state_const)
 ```
 - Trabalhamos, portanto, com o nome dos estados, variável categórica, e, variáveis numéricas, que indicam desde o ano em que a constituição foi promulgada (constitution_year) até o número de palavras dedicadas a determinado elementoem cada constituição (exemplo: número de palavras referentes a declaração de direitos em determinada constituição - declaration_rights).
 
-# *Análise*
+# *Análise e visualização de dados*
 
 ## Agregando a lista de abreviações à base de dados
 ```{r}
-state_const <- state_const %>%  left_join(States_and_Abbreviations, constituicoes_poderes, by = "state") #adicionando a abreviação dos estados para facilitar a manipulação e visualização dos dados
+state_const <- state_const %>%  left_join(States_and_Abbreviations, constituicoes_poderes, by = "state") %>% rename(state_abrev=abbreviation) #adicionando a abreviação dos estados para facilitar a manipulação e visualização dos dados
 
 ```
 
@@ -109,12 +109,29 @@ state_const <- state_const %>%  left_join(States_and_Abbreviations, constituicoe
 ## Análise das constituições atuais a partir do total de palavras
 - Com o objetivo de analisar as constituições atuais a partir do total de palavras e dos anos em que foram promulgadas, iremos manipular os dados, selecionando e filtrando as informações de interesse a partir da base de dados, e, em seguida, as colunas de interesse usando o pacote dplyr. 
 ```{r}
-state_const_current_total_words <- state_const %>% select(state, constitution_year, current_constitution, total_words) %>% #selecionando as variaveis de interesse - nome do estado, ano da constituição, constituição atual e total de palavras
+state_const_current_total_words <- state_const %>% select(state_abrev, constitution_year, current_constitution, total_words) %>% #selecionando as variaveis de interesse - nome do estado, ano da constituição, constituição atual e total de palavras
   filter(current_constitution == 1) #filtrando apenas as constituições vigentes
 ```
 
+-  A fim de analisar a variação das datas de promulgação das constituições estaduais vigentes, construímos um gráfico de densidade. Optou-se por esse tipo de gráfico por que:
+1. O objetivo é observar a distribuição das constituições vigentes por estado ao longo do tempo 
+2. O ano da constituição vigente (constitution_year) é a variável em foco, variável única
+3. Como os Estados Unidos têm muitos estados, totalizando 50, existem muitos "data points" e por isso optou-se pelo histograma em linha, para evidenciar o pico da promulgação de constituições.
+
+```{r}
+state_const_current_total_words %>% ggplot(aes(x=constitution_year)) + # estabelecendo o eixo x - univa variavel que será ano
+  geom_density(color="black", size=1)+ #definindo a cor e o tamanho da linha 
+  theme_classic() +  #estabelecendo o tema do gráfico para um modelo com fundo branco
+  labs(title = "Promulgação de constituições ao longo do tempo",
+       x = "Ano de promulgação",
+       y = "densidade") #nomeando os eixos
+
+```
+- Após identificar o pico de promulgação das constituições vigentes, segue-se para analisar a variação do número de palavras das constituições vigentes em cada Estado, a fim de identificar correlações.
 
 # *Resultados*
+
+- A partir das análises, percebe-se que o pico de promulgação de constituições é 2016.
 
 # *Conclusões*
 
