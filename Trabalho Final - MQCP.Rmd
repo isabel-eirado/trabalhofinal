@@ -379,7 +379,7 @@ psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```{r message=TRUE, paged.print=TRUE}
 alpha1 <- psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```
-## Teste T para comprovar hipótese
+## Teste T para comprovar hipótese ####
 - O teste-t foi utilizado para comparar o tamanho (em termos de número de palavras) das constituições atuais e a média do tamanho das constituições históricas.
 - Criando uma coluna com a Média de Palavras das Constituições Estaduais:
 ```{r}
@@ -390,8 +390,9 @@ constituicoes_testehipotese <- state_const %>%
   mutate(media_total_words = mean(total_words))
 ```
 
-- Operacionalizando a variável media_antigas
+
 ```{r}
+# Operacionalizando a variável media_antigas
 constituicoes_antigas <- constituicoes_testehipotese %>% 
   filter(current_constitution == 0) %>%
   group_by(state) %>%
@@ -417,8 +418,11 @@ valor_novas <- constituicoes_novas$total_words
 t.test(x=media_antigas, y=valor_novas, paired = TRUE)
 ```
 
+```{r}
+plot(t.test(media_antigas,valor_novas, mu = 0))
+```
 
-# Conclusões
+# Conclusões ####
 
 - A partir das análises, identificamos que:
 1. (inserir relação encontrada entre variação de palavras e o ano de promulgação)
