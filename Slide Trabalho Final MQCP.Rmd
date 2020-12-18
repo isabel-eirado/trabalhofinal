@@ -21,7 +21,6 @@ library(rmarkdown)
 ## Objetivos
 
 - Objetivo principal: Analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses a partir das mudanças constitucionais
-
 - Objetivos específicos: 
 1. Observar mudanças constitucionais a partir das variações das palavras totais das constituições vigentes
 2. Verificar a variação entre o número de constituições implementadas ao longo do tempo
@@ -61,9 +60,18 @@ plot(pressure)
 
 ## Referências
 
-
-- BURGESS, Michael D.; TARR, G. Alan; MARKO, Josef (Ed.). Constitutional dynamics in federal systems: sub-national perspectives. Montreal: McGill-Queen’s University Press, 2012
+ - BURGESS, Michael D.; TARR, G. Alan; MARKO, Josef (Ed.). Constitutional dynamics in federal systems: sub-national perspectives. Montreal: McGill-Queen’s University Press, 2012.
+ 
 - CLOUSE, J.G. (2019). The U.S. State Constitutions Dataset, 1776-2017 (Feb 2019 Version).
+
 - CLOUSE, Julia Gervaise-Rubicam. Converting the Texts of the US State Constitutions into Quantifiable Data: A Text Analytics Project. 2019. Tese de Doutorado. George Mason University.
+
+- DEALEY, J.Q. Growth of American State Constitutions: From 1776 to the End of the Year 1914. Ithaca, NY: Cornell University Library, 2009.
+
+- DE GRAZIA, A. State constitutions: Are they growing longer. State Government, 26(4), 82-83, 1954.
+
+- LUCE, R. Legislative Principles: The History and Theory Behind Lawmaking by Representative Government. Clark, NJ: The Lawbook Exchange, Ltd, 2009.
+
+- STURM, A.L. The development of state constitutions. Publius, 12(1), State constitutional design in federal systems, 57-98, 1982.
+
 - TARR, G. Alan. Explaining state constitutional changes. Revista de Investigações Constitucionais, v. 3, n. 2, p. 9-32, 2016.
-- WOODWARD-BURNS, Robinson. American Reconstitution: How The States Stabilize American Constitutional Development. 2017.
