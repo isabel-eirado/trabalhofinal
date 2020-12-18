@@ -32,7 +32,8 @@ library(sf)
 >*laws and institutions must go hand in hand with
 the progress of the human mind. As that becomes more developed, more enlightened,
 as new discoveries are made, new truths disclosed, and manners and opinions change
-with the circumstances, institutions must advance also, and keep pace with the times.” - Thomas Jefferson, 1816*
+with the circumstances, institutions must advance also, and keep pace with the times.” 
+- Thomas Jefferson, 1816*
 
 # Resumo ####
 
@@ -45,11 +46,8 @@ text-align: justify}
 
 # Introdução ####
 
-- Objeto: Mudança constitucional no federalismo norte-americano
-
-- Objetivo principal: Analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses a partir das mudanças constitucionais
-
-- Objetivos específicos: 
+Este trabalho tem como objeto a mudança constitucional no federalismo estadunidense. O objetivo principal é analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses a partir das mudanças constitucionais.
+Deste, surgem como objetivos específicos: 
 1. Observar mudanças constitucionais a partir das variações das palavras totais das constituições vigentes
 2. Verificar a variação entre o número de constituições implementadas ao longo do tempo
 3. Observar, a partir de um índice, a mudança proporcional entre os três poderes nas constituições estaduais
@@ -69,7 +67,7 @@ b) de que forma os estados vêm se adaptando às necessidades de novas ações p
 
 De modo, geral, portanto, observa-se que a importância da compreensão das constituições subnacionais está justamente no fato de que a maior parte das revisões constitucionais nos EUA acontecem em nível estadual. Para além deste fato, reforça-se que a compreensão das instituicições estadunidenses e do sistema federalista do país se apoiam, largamente, também neste nível.
 
-- Pergunta: É possível observar padrões de mudança nas constituições estaduais dos 50 estados americanos ao longo do tempo?
+Assim, questiona-se: é possível observar padrões de mudança nas constituições estaduais dos 50 estados americanos ao longo do tempo?
 
 <style>
 body {
@@ -96,15 +94,15 @@ Abaixo é possível visualizar o banco de dados:
 paged_table (state_const)
 ```
 
-- Trabalhamos, portanto, com uma variável categórica, o nome dos estados, variável categórica, e o restante de variáveis numéricas, que indicam desde o ano em que a constituição foi promulgada (constitution_year) até o número de palavras dedicadas a determinado elemento em cada constituição (exemplo: número de palavras referentes a declaração de direitos em determinada constituição - declaration_rights). Neste trabalho focaremos nas variáveis:
+- Trabalhamos, portanto, com duas variáveis categóricas, o nome dos estados e a variável "constituição atual" (igual a 0, para constituições históricas, igual a 1 para constituições vigentes). As demais variáveis são numéricas, que indicam desde o ano em que a constituição foi promulgada (constitution_year) até o número de palavras dedicadas a determinado elemento em cada constituição (exemplo: número de palavras referentes a declaração de direitos em determinada constituição - declaration_rights). Neste trabalho focaremos nas variáveis:
 1. statehood - informa o ano em que o estado passou a integrar a Federação dos Estados Unidos da América
-2. current_constitution - informa a constituição vigente (1) e as constituições ultrapassadas
-3. total_words - informa quantas palavras cada constituição tem, desde a primeira até a vigente
-4. legislative - texto que descreve as funções, procedimentos, poderes e limitações da legislatura
-5. executive - do texto que descreve as funções, estrutura, poderes e limitações do Poder Executivo
-6. judicial - texto que descreve as funções e poderes dos sistemas de tribunais estaduais e dos funcionários do Poder Judiciário
+2. current_constitution - informa a constituição vigente (1) e as constituições históricas (0)
+3. total_words - informa quantas palavras cada constituição tem ou teve
+4. legislative -  descreve as funções, procedimentos, poderes e limitações da legislatura
+5. executive - descreve as funções, estrutura, poderes e limitações do Poder Executivo
+6. judicial - descreve as funções e poderes dos sistemas de tribunais estaduais e dos funcionários do Poder Judiciário
 
-A literatura demonstra que, ao longo do tempo, as Constituições tem se alargado. De acordo com Tarr (2006), a história das Constituições Estaduais dos EUA consiste na mudança constitucional. A expansão e evolução das Constituição já foi alvo de muito interesse por pesquisadores (DEALEY, 2009; BRYCE, 1995), assim como a expansão em termos de número de palavras, isto é, seu tamanho (LUCE, 2009; DE GRAZIA, 1954; STURM, 1982). A novidade da base trazida por Gervais (2019) é a transformação dos textos constitucionais em variáveis quantitativas comparáveis. Assim, parte-se da premissa que as Constituições Estaduais mudam ao longo tempo, se expandindo (fato medido pela quantidade de palavras). Dado que a expansão vem ocorrendo ao longo do tempo, a ideia é verificar se as atuais constituições se expandiram mais do que a média das constituições históricas. Com base nisso, pretende-se verificar se:
+A literatura demonstra que, ao longo do tempo, as Constituições tem se alargado. De acordo com Tarr (2006), a história das Constituições Estaduais dos EUA consiste na mudança constitucional. A expansão e evolução das Constituição já foi alvo de muito interesse por pesquisadores (DEALEY, 2009; BRYCE, 1995), assim como a expansão em termos de número de palavras, isto é, seu tamanho (LUCE, 2009; DE GRAZIA, 1954; STURM, 1982). A novidade da base trazida por Clouse (2019) é a transformação dos textos constitucionais em variáveis quantitativas comparáveis. Assim, parte-se da premissa que as Constituições Estaduais mudam ao longo tempo, se expandindo (fato medido pela quantidade de palavras). Dado que a expansão vem ocorrendo ao longo do tempo, a ideia é verificar se as atuais constituições se expandiram mais do que a média das constituições históricas. Com base nisso, pretende-se verificar se:
 
 *H0: *A variação do número de palavras permance a mesma ao longo das mudanças constitucionais.
 
@@ -214,9 +212,7 @@ select(state, constitution_year, current_constitution, total_words, state_number
   filter(current_constitution == 1) #filtrando apenas as constituições vigentes
 ```
 
-- Primeiramente, queremos identificar a variação do número de palavras das constituições vigentes em cada Estado. Optou-se por utilizar o tipo de gráfico de pontos (scatter chart) pelos seguintes motivos: 
-1. O objetivo é observar a distribuição do número de palavras nas constituições de cada estado;
-2. Temos duas variáveis em foco - total_word e state - para evidenciar a distribuição de palavras nas constituições dos Estados.
+- Em primeiro lugar, queremos identificar a variação do número de palavras das constituições vigentes em cada Estado, a partir de um gráfico de pontos (scatter chart), a fim de observar a distribuição do número de palavras nas constituições de cada estado; e, a partir das variáveis em foco (total_words e state) evidenciar a distribuição de palavras nas constituições dos Estados.
 
 
 ### Gráfico 1 - Total de palavras das constituições vigentes por estado ####
@@ -240,7 +236,8 @@ state_const_current_total_words %>%
 
 ### Gráfico 2 - Variação do total de palavras das constituições por estado
 [Ana e Isabel fazer o gráfico dar certo]
-- Dado que o pico de promulgação de constituições é o ano de 2016, objetivamos identificar se o tempo foi um fator relevante para gerar mudança no número de palvaras totais das constituições. Sendo assim, mediremos a variação do número de palavras das constituições (a partir do desvio padrão) por estado para, desta forma, poderemos identificar se o total de palavras das constituições de cada estado variou ao longo do tempo ou não. 
+
+- O objetivo aqui é observar se o tempo é um fator relevante para gerar mudança no número de palvaras totais das constituições. Sendo assim, mediremos a variação do número de palavras das constituições (a partir do desvio padrão) por estado para, desta forma, poderemos identificar se o total de palavras das constituições de cada estado variou ao longo do tempo ou não. 
 
 - A análise da variação do número de palavras pode indicar correlações entre o ano e o número de palavras e nos ajudar a compreender as mudanças constitucionais a partir do número de palavras, bem como se houve influência do ano nesse indicador.
 
@@ -322,7 +319,7 @@ plot(t.test(media_antigas,valor_novas, mu = 0))
 
 
 ## Análise das mudanças constitucionais pelo número de constituições promulgadas
-- Após identificar o pico de promulgação das constituições vigentes, segue-se para analisar o número de Constituições promulgadas por cada estado estadunidense, identificando o ano da constituição vigente de cada estado. Sendo assim, essa análise ajuda a verificar a propensão dos estados de implementarem mudanças constitucionais.
+- Após analisar relações em relação ao número de palavras, segue-se para análise do número de Constituições promulgadas por cada estado dos EUA, identificando o ano da constituição vigente de cada estado. 
 
 - O Alabama não foi excluído dessa análise por não afetar os resultados para o propósito desta subseção.
 ```{r, echo=FALSE}
