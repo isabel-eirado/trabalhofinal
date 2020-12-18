@@ -129,7 +129,8 @@ Diante dos critérios de reproducibilidade da pesquisa científica, disponibiliz
 
 ## Análise das mudanças constitucionais pelo número total de palavras nas constituições ####
 
-[Ana incluir análises]
+Para essa seção, apresentamos três gráficos e um mapa interativo que revisitam os achados de Clouse (2019). O mapa interativo permite a visualização dos dados individuais de cada estado, além de apresentar - a partir da variação nas cores de preenchimento - o número total de palavras dispostas em cada Constituição. Outra forma de visualização destes dados está disposta no Gráfico 1, que apresenta o número de palavras nas Constituições estatais vigentes a partir de um gráfico de pontos. Na análise quantitativa sobre as mudanças constitucionais, o Gráfico 2 acompanha a análise anterior, medindo a variação entre as médias a partir do desvio padrão. Por fim, o Gráfico 3 busca uma correlação entre os anos de mudanças constitucionais e o número de palavras em cada texto constitucional. 
+
 
 ### Mapa interativo com informações gerais sobre as Constituições Estaduais dos Estados Unidos ####
 
@@ -241,9 +242,11 @@ state_const_current_total_words %>%
 
 
 A partir do gráfico, percebe-se que:
-1. O Alabama é um outlier na medida em que dispõe de um total de palavras absurdamente maior do que qualquer outro estado
+1. O Alabama é um outlier na medida em que dispõe de um total de palavras maior do que qualquer outro estado. A constituição do Alabama tem 339.576 palavras, puxando a média de palavras para cima. O Texas tem a segunda maior Constituição em termos de número de palavras, mas ainda assim, a diferença de palavras entre as duas constituições é de 252.495. 
 2. A Constituição de Vermont é a menor em termos de número de palavras 
-3. O Texas tem a segunda maior Constituição em termos de número de palavras
+3. Observa-se, com exceção do Alabama, que os valores totais de palavras dos textos constituientes tem uma variação menor. A diferença entre o Texas, segundo maior texto constitucional e Vermont, menor texto constitucional, é de 79.169 palavras. 
+
+
 
 ### Gráfico 2 - Variação do total de palavras das constituições por estado
 O objetivo deste gráfico é observar se o tempo é um fator relevante para gerar mudança no número de palvaras totais das constituições. Sendo assim, mediremos a variação do número de palavras das constituições (a partir do desvio padrão) por estado para, desta forma, poderemos identificar se o total de palavras das constituições de cada estado variou ao longo do tempo ou não. 
@@ -403,8 +406,8 @@ const_eua_painel %>%
 
 Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e a propensão a mudança constitucional pela análise da quantidade total de constituições promulgadas. 
 
-### Gráfico 6 - Correlação entre o número de constituições e a data de criação do estado
-Este gráfico foi elaborado com o objetivo de medir a correlação entre o número de constituições que cada estado já teve aprovada e a data de criação do Estado. A partir desses dados será possível inferir se há correlação entre essas duas variáveis - número de constituições e data de criação do estado, ou seja, se estados mais antigos são mais propensos a romoverem mudanças constitucionais.
+### Gráfico 6 - Correlação entre o numero de constituições e a data de criação do estado
+
 
 ```{r, fig.height=6, fig.width=6, echo=FALSE, warning=FALSE, message = FALSE}
 state_const %>% 
@@ -415,10 +418,10 @@ state_const %>%
             add = "reg.line", # Adicionando linha de regressão
             conf.int = TRUE) + 
   stat_cor(aes(), method = "pearson", label.x = 2) + # Adicionando correlação
-   labs(x = "Número de Constituições",
-       y = "Data de criação do estado") 
+   labs(x = "Data de criação do estado",
+       y = "Número de Constituições") 
 ```
-Dada a dispersão do gráfico e como o p-valor é menor do que 0,05, é possível descartar a hipótese de que quanto mais antiga a data de criação do estado mais propenso ele é a promover mudanças constitucionais. 
+
 
 ## Análise das mudanças constitucionais a partir do Índice de Mudança Proporcional dos Poderes ####
 
@@ -451,7 +454,7 @@ ONDE:
 Este índice fornece a medida de porporção de cada um dos poderes em relação ao total dedicado aos três em cada Constituição adotada ou emendada pelos 50 estados. Deste modo, espera-se observar se existe proporcionalidade entre eles, ou seja, se há um equilíbrio, necessário ao mecanismo de Checks and Balances, ou se a presença (aqui entendida como o número de palavras dedicadas a eles) de cada um dos poderes nas constituições foi se alterando ao longo do tempo de forma desigual.
 
 
-```{r, echo=FALSE, message = FALSE, warning=FALSE}
+```{r, echo=FALSE, message = FALSE}
 #Manipulando os dados: criando tabela com os índices
 constituicoes_poderes <- state_const %>% 
   ##criando um novo data frame com as manipulações
@@ -544,6 +547,7 @@ A partir do gráfico é possível identificar uma tendência a crescimento do n�
 
 ### TESTE DE CONFIANÇA - Alpha de Cronbach a partir dos IMPs ####
 
+[Explicação tabela alpha Ana]
 Elaboramos o teste de confiança pelo Alpha de Cronbach a fim de identificar se as variáveis relativas aos Índices de Mudança Proporcional estão bem relacionadas.
 ```{r, echo=FALSE, warning=FALSE, message = FALSE}
 library(psych) #baixando o pacote psych
@@ -564,24 +568,24 @@ psych::alpha(tabela_para_alpha, check.keys = TRUE)
 alpha1 <- psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```
 
-A partir do teste, identificamos um alpha de 0,83 indicando excelente métrica e ótima relação entre as variáveis relativas os Três Poderes. 
 
 # Conclusões ####
 
 - A partir das análises, identificamos que:
-1. A variação temporal e o número total de palavras influenciam nas mudanças constitucionais na medida em que, como observado, a quantidade de palavras nas constituições tende a crescer ao longo do tempo.
-2. O Alabama é um outlier na medida em que dispõe de um total de palavras absurdamente maior do que qualquer outro estado.
-3. Los Angeles é o estado mais propenso a mudanças constitucionais, a partir do histórico da quantidade de constituições já elaboradas no Estado. Por outro lado, temos 18 Estados que tiveram apenas duas constituições, apresentando menor propensão a mudança constitucional.
-4. O ano de criação do estado aparenta não influenciar na propensão a mudança constitucional.
-5. Há uma tendência de crescimento da regulamentação dos três poderes na medida em que tanto os índices de mudança proporcional dos poderes quanto o total de palavras abordando o assunto evidenciam essa mudança.
+1. (inserir relação encontrada entre variação de palavras e o ano de promulgação)
+2. Los Angeles é o estado mais propenso a mudanças constitucionais, a partir do histórico da quantidade de constituições já elaboradas no Estado. Por outro lado, temos 18 Estados que tiveram apenas duas constituições, apresentando menor propensão a mudança constitucional.
+3. O ano de criação do estado aparenta não influenciar na propensão a mudança constitucional
+4. Há uma tendência de crescimento da regulamentação dos três poderes na medida em que tanto os índices de mudança proporcional dos poderes quanto o total de palavras abordando o assunto evidenciam essa mudança.
 
 - Ademais, identificamos que as variáveis relativas aos três poderes estão bem relacionadas, fortalecendo a hipótese de que há uma tendência ao aumento de regras formais por meio das constituições voltadas aos Três Poderes.
 
 - Observamos, ainda, a comprovação da hipótese alternativa na medida em que o teste T indica diferença estatisticamente significativa.
 
-- Destacamos, ainda, a necessidade de análise qualitativa dos dados, pois eles foram estruturados de forma a aglomerar elementos que poderiam ser interessantes para comparação. Um exemplo é a variável discriminação, que abarca tanto regras formais que combatem qualquer tipo de discriminação, seja ela racial, de gênero, de sexualidade, etc., quanto leis voltadas a reforças segregações. Sendo assim, a estruturação dos dados dificulta a elaboração de inferências.
+- Identificamos ainda que o Alabama se apresenta como outsider para algumas medidas ao ponto em que apresenta um número de palavras desproporcionalmente maior do que os outro estados. 
 
-- Por fim, sugerimos para estudos futuros o aprofundamento da análise qualitativa ao ponto em que é preciso englobar, para além da quantidade de número de palavras, outros aspectos institucionais, legais e sociais que permitam melhor compreender o processo de mudança constitucional nos 50 estados.
+- Destacamos, ainda, a necessidade de análise qualitativa dos dados, pois os dados foram estruturados de forma a aglomerar elementos que poderiam ser interessantes para comparação. Um exemplo é a variável discriminação, que abarca tanto. Sendo assim, a estruturação dos dados dificulta a elaboração de inferências.
+
+- Por fim, sugerimos para estudos futuros o aprofundamento da análise qualitativaao ponto em que é preciso englobar, para além da quantidade de número de palavras, outros aspectos institucionais, legais e sociais que permitam melhor compreender o processo de mudança constitucional nos 50 estados.
 
 # Referências
 
