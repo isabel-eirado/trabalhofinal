@@ -240,7 +240,10 @@ state_const_current_total_words %>%
 
 
 
-A partir do gráfico, percebe-se que ser o Alabama é um outlier em relação ao total de palavras; que a Constituição de Vermont é a com menos palavras; e que do Texas é a segunda maior em termos de palavras. 
+A partir do gráfico, percebe-se que:
+1. O Alabama é um outlier na medida em que dispõe de um total de palavras absurdamente maior do que qualquer outro estado
+2. A Constituição de Vermont é a menor em termos de número de palavras 
+3. O Texas tem a segunda maior Constituição em termos de número de palavras
 
 ### Gráfico 2 - Variação do total de palavras das constituições por estado
 O objetivo deste gráfico é observar se o tempo é um fator relevante para gerar mudança no número de palvaras totais das constituições. Sendo assim, mediremos a variação do número de palavras das constituições (a partir do desvio padrão) por estado para, desta forma, poderemos identificar se o total de palavras das constituições de cada estado variou ao longo do tempo ou não. 
