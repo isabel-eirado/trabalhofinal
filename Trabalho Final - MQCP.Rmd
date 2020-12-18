@@ -223,14 +223,14 @@ select(state, constitution_year, current_constitution, total_words, state_number
 
 
 ### Gráfico 1 - Total de palavras das constituições vigentes por estado ####
-A fim de identificar a diferença do número de palavras das constituições vigentes em cada Estado, criamos um gráfico de pontos (scatter chart). A partir das variáveis em foco (total_words e state) é possível evidenciar a distribuição de palavras nas constituições dos Estados.
+A fim de identificar a diferença do número de palavras das constituições vigentes em cada Estado, criamos um gráfico de pontos (scatter chart). A partir das variáveis em foco ("total de palavras" e "estado") é possível evidenciar a diferença entre o número de palavras nas constituições vigentes em cada estado.
 ```{r paged.print=TRUE, echo=FALSE, warning=FALSE, message = FALSE}
 options(scipen = 999)
 state_const_current_total_words %>% 
   mutate(abbreviation=fct_reorder(abbreviation, total_words)) %>%
   ggplot(aes(x=abbreviation, y= total_words)) + #definindo os dados a serem projetados nos eixos x e y
   geom_point(color="red", size=1, fill="red") +#definindo a geometria scatter com cor de contorno e preenchimento vermelhas e o tamanho do preenchimento
-  theme_classic() +  #definindo o tema classico
+  theme_minimal() +  #definindo o tema minimo com linhas para facilitar a identificação de cada ponto
   theme(axis.text.x = element_text(angle=90, hjust=1)) + #definindo a posição vertical para o eixo x
   labs(x = "Estado",
        y = "Total de palavras") #nomeando os eixos
@@ -240,15 +240,10 @@ state_const_current_total_words %>%
 
 
 
-- A partir do gráfico, percebe-se que ser o Alabama é um outlier em relação ao total de palavras.
+A partir do gráfico, percebe-se que ser o Alabama é um outlier em relação ao total de palavras; que a Constituição de Vermont é a com menos palavras; e que do Texas é a segunda maior em termos de palavras. 
 
 ### Gráfico 2 - Variação do total de palavras das constituições por estado
-[Ana e Isabel fazer o gráfico dar certo]
-
-- O objetivo aqui é observar se o tempo é um fator relevante para gerar mudança no número de palvaras totais das constituições. Sendo assim, mediremos a variação do número de palavras das constituições (a partir do desvio padrão) por estado para, desta forma, poderemos identificar se o total de palavras das constituições de cada estado variou ao longo do tempo ou não. 
-
-- A análise da variação do número de palavras pode indicar correlações entre o ano e o número de palavras e nos ajudar a compreender as mudanças constitucionais a partir do número de palavras, bem como se houve influência do ano nesse indicador.
-
+O objetivo deste gráfico é observar se o tempo é um fator relevante para gerar mudança no número de palvaras totais das constituições. Sendo assim, mediremos a variação do número de palavras das constituições (a partir do desvio padrão) por estado para, desta forma, poderemos identificar se o total de palavras das constituições de cada estado variou ao longo do tempo ou não. 
   
 ```{r paged.print=TRUE, echo=FALSE, fig.height=6, fig.width=8, warning=FALSE, message = FALSE}
 var_words <- state_const %>%
@@ -267,6 +262,11 @@ filter(state != "Alabama") %>% #removendo o alabama por ser um outlier
        y = "Estado") #nomeando os eixos
   
 ```
+
+
+
+
+O gráfico informa que houve variação considerável do número de palavras da Constituição vigente nos estados com relação à média, esta considerando todas as consituições. Portanto, há indícios de que o tempo e o número de palavras contribuem com mudanças constitucionais.
 
 ### Gráfico 3 - Total de palavras por Constituição
 [Amanda ajustar posição R]
