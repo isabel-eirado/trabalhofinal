@@ -38,7 +38,7 @@ with the circumstances, institutions must advance also, and keep pace with the t
 
 # Resumo ####
 
-O objetivo deste trabalho é revistar o Banco de Dados **"US State Constitutions Dataset"**, criado por Julia Gervaise-Rubicam Clouse (CLOUSE, 2019), e propor um novo olhar e análises aos dados ali apresentados. O dataset converte textos constitucionais (historicos e atuais) dos estados dos EUA para dados quantificáveis utilizando-se da categorização destes textos. A ideia do trabalho de Clouse (2019) é analisar a evolução das ideias e prioridades políticas nos 50 estados do país, e analisar a mudança constitucional dos estados ao longo do tempo. Utilizando-se dessa base de dados, este trabalho propõe-se a analisar as mudanças constitucionais a partir do número de palavras totais das constituições e das regras formais que abarcam os três Poderes - Executivo, Legislativo e Judiciário. Conclui-se que há um campo fértil para comparação entre as constituições estaduais e se observam tendências gerais nos tópicos de foco dos estados. O teste de hipótese realizado demonstra que as constituições atuais são maiores e mais abrangentes que as constituições históricas, e foi possível fazer algumas relações entre as variáveis. Pontua-se, por fim, que este tipo de análise se beneficiaria de uma análise qualitativa em profundidade, a fim de melhor avaliar as categorias analíticas e tirar conclusões combinadas entre dados qualitativos e quantitativos.
+O objetivo deste trabalho é revistar o Banco de Dados **"US State Constitutions Dataset"**, criado por Julia Gervaise-Rubicam Clouse (CLOUSE, 2019), e propor um novo olhar e análises aos dados ali apresentados. O dataset converte textos constitucionais (históricos e atuais) dos Estados dos EUA para dados quantificáveis utilizando-se da categorização destes textos. A intenção do trabalho de Clouse (2019) é analisar a evolução das ideias e prioridades políticas nos 50 estados do país, em que pese a mudança das Constituições Estaduais no decorrer do tempo. Utilizando-se dessa base de dados, este trabalho propõe analisar as mudanças constitucionais a partir do número de palavras totais dos textos constitucionais e das regras formais que abarcam os três poderes - Executivo, Legislativo e Judiciário. Conclui-se que há um campo fértil para comparação entre as Constituições Estaduais e se observam tendências gerais nos tópicos de foco dos Estados. O teste de hipótese realizado demonstra que as Constituições atuais são maiores e mais abrangentes que as Constituições históricas, sendo possível verificar algumas relações entre as variáveis. Por fim, pontua-se que este tipo de pesquisa se beneficiaria de uma análise qualitativa em profundidade, a fim de melhor avaliar as categorias analíticas, de modo a viabilizar conclusões combinadas entre dados qualitativos e quantitativos.
 
 <style>
 body {
@@ -47,29 +47,29 @@ text-align: justify}
 
 # Introdução ####
 
-Este trabalho tem como objeto a mudança constitucional no federalismo estadunidense. O objetivo principal é analisar a evolução de ideias e prioridades políticas nos 50 estados estadunidenses a partir das mudanças constitucionais.
+Este trabalho tem como objeto a mudança constitucional no federalismo estadunidense. O objetivo principal é analisar a evolução de ideias e prioridades políticas nos 50 Estados estadunidenses a partir das mudanças constitucionais.
 Deste, surgem como objetivos específicos: 
-1. Observar mudanças constitucionais a partir das variações das palavras totais das constituições
-2. Verificar a tendência a mudança constitucional a partir do número de constituições implementadas ao longo do tempo
-3. Observar, a partir de um índice, a mudança proporcional entre os três poderes nas constituições estaduais
+1. Observar mudanças constitucionais a partir das variações das palavras totais das Constituições;
+2. Verificar a tendência a mudança constitucional a partir do número de Constituições implementadas ao longo do tempo e;
+3. Observar, a partir de um índice, a mudança proporcional entre os três poderes nas constituições estaduais.
 
 - Contextualização
 
-A organização do federalismo estadunidense dá às unidades subnacionais considerado potencial para inovações constitucionais e experimentação política ("espaço constitucional"), inclusive em comparação à maior parte de outras federações (BURGESS, TARR e MARKO, 2004).Essa possibilidade de mudança foi utilizada pelos estados de maneira frequente - seja pela substituição completa ou pelo emendamento das Cartas vigentes. Diferentemente do que ocorre com a Constituição Federal, emendas e mudanças nas Constituições Estaduais são relativamente fáceis, além de congregarem uma gama de atores, tendo um caráter popular mais visível, dado que são propostas ou votadas pela população (ACIR, 1989). 
+A organização do federalismo estadunidense dá às unidades subnacionais considerado potencial para inovações constitucionais e experimentação política ("espaço constitucional"), inclusive em comparação à maior parte de outras federações (BURGESS, TARR & MARKO, 2004).Essa possibilidade de mudança foi utilizada pelos estados de maneira frequente - seja pela substituição completa ou pelo emendamento das Cartas vigentes. Diferentemente do que ocorre com a Constituição Federal, emendas e mudanças nas Constituições Estaduais são relativamente fáceis, além de congregarem uma gama de atores, tendo um caráter popular mais visível, dado que são propostas ou votadas pela população (ACIR, 1989). 
 
 Além disto, Woodward-Burns (2007) irá apontar que é justamente a revisão constitucional estadual que resolve as controvérsias constitucionais nacionais, evitando emendas nesta e atuando na resulução de conflitos, em escala nacional, entre os poderes. De fato, enquanto em nível federal, somente uma Constituição foi ratificada, com 27 emendas, os estados Americanos tem uma larga produção constitucional, com 153 constituições adotadas[^1], sendo que o número de emendas, até 2013, chegava a quase 10.000 (TARR, 2016).
 
 [^1]:Aqui, utilizamos a contagem feita por Clouse (2019). É importante apontar que sua contagem, conforme será explicitados nas notas metodológicas, diverge da contagem de outros autores, como o Book of States (2012), que aponta para a exitência de 145.
 
-O que está por trás da frequência das alterações, e é particularmente o objeto de interesse aqui, são os tipos de mudanças propostos pelas novas constituições. As constituições estaduais tendem a ser mais longas que a Constituição Federal (CF) por serem mais detalhadas no que tange as relações cotidianas entre o governo e a população dos estados (ACIR, 1989). Além disso, boa parte das constituições estaduais irá abordar tópicos não abordados na CF, como Governo Local e Educação (TARR, 2016). Mas, em grande medida, representam escolhas políticas dos próprios estados, as necessidades ali encontradas e filosofias de governo próprias (ACIR, 1989).
+O que está por trás da frequência das alterações, e é particularmente o objeto de interesse aqui, são os tipos de mudanças propostos pelas novas Constituições. As Constituições Estaduais tendem a ser mais longas que a Constituição Federal (CF) por serem mais detalhadas no que tange as relações cotidianas entre o governo e a população dos estados (ACIR, 1989). Além disso, boa parte das Constituições Estaduais irá abordar tópicos não abordados na CF, como Governo Local e Educação (TARR, 2016). Mas, em grande medida, representam escolhas políticas dos próprios estados, as necessidades ali encontradas e filosofias de governo próprias (ACIR, 1989).
 
-Assim, se por um lado se entende que as constituições estaduais completam e balanceiam a Constituição Federal, e, portanto, são essenciais para o funcionamento do sistema federativo estadunidense, por outro a frequência das mudanças das constituições representa um lugar fértil para entender:
+Assim, se por um lado se entende que as Constituições Estaduais completam e balanceiam a Constituição Federal, e, portanto, são essenciais para o funcionamento do sistema federativo estadunidense, por outro a frequência das mudanças das Constituições representa um lugar fértil para entender:
 a) de que forma as ideias e prioridades políticas vêm evoluindo nos 50 estados;
 b) de que forma os estados vêm se adaptando às necessidades de novas ações políticas, sociais, domésticas e externas.
 
-De modo, geral, portanto, observa-se que a importância da compreensão das constituições subnacionais está justamente no fato de que a maior parte das revisões constitucionais nos EUA acontecem em nível estadual. Para além deste fato, reforça-se que a compreensão das instituicições estadunidenses e do sistema federalista do país se apoiam, largamente, também neste nível.
+De modo, geral, portanto, observa-se que a importância da compreensão das Constituições subnacionais está justamente no fato de que a maior parte das revisões constitucionais nos EUA acontecem em nível estadual. Para além deste fato, reforça-se que a compreensão das instituicições estadunidenses e do sistema federalista do país se apoiam, largamente, também neste nível.
 
-Assim, questiona-se: é possível observar padrões de mudança nas constituições estaduais dos 50 estados americanos ao longo do tempo?
+Assim, questiona-se: é possível observar padrões de mudança nas Constituições Estaduais dos 50 estados americanos ao longo do tempo?
 
 <style>
 body {
@@ -99,26 +99,25 @@ state_const %>% #selecionando o dataframe
 ```
 
 Neste trabalho focaremos nas variáveis:
-1. state - nome dos estados da Federação
-2. abbreviation - abreviação dos nomes dos estados
-3. statehood - informa o ano em que o estado passou a integrar a Federação dos Estados Unidos da América
-4. current_constitution - informa a Constituição vigente (1) e as constituições históricas (0)
-5. total_words - informa quantas palavras cada Constituição tem ou teve
-6. legislative -  descreve as funções, procedimentos, poderes e limitações da legislatura
-7. executive - descreve as funções, estrutura, poderes e limitações do Poder Executivo
-8. judicial - descreve as funções e poderes dos sistemas de tribunais estaduais e dos funcionários do Poder Judiciário
+1. state - nome dos estados da Federação.
+2. abbreviation - abreviação dos nomes dos Estados.
+3. statehood - informa o ano em que o estado passou a integrar a Federação dos Estados Unidos da América.
+4. constitution_year - informa o ano da Constituição.
+5. current_constitution - informa a Constituição vigente (1) e as Constituições históricas (0).
+6. total_words - informa o número total de palavras da Constituição.
+7. legislative -  descreve as funções, procedimentos, poderes e limitações do Poder Legislativo
+8. executive - descreve as funções, estrutura, poderes e limitações do Poder Executivo
+9. judicial - descreve as funções e poderes dos sistemas de tribunais estaduais e dos funcionários do Poder Judiciário
 
-Trabalhamos, portanto, com três variáveis categóricas, o nome dos estados, as abreviações e a variável "Constituição atual". As demais variáveis são numéricas e indicam desde o ano em que a Constituição foi promulgada (constitution_year) até o número de palavras dedicadas a determinado elemento em cada Constituição.
+A literatura demonstra que, ao longo do tempo, as Constituições tem se alargado. De acordo com Tarr (2006), a história das Constituições Estaduais dos EUA consiste na mudança constitucional. A expansão e evolução das Constituições já foi alvo de muito interesse por pesquisadores (DEALEY, 2009; BRYCE, 1995), assim como a expansão em termos de número de palavras, isto é, seu tamanho (LUCE, 2009; DE GRAZIA, 1954; STURM, 1982). A novidade da base trazida por Clouse (2019) é a transformação dos textos constitucionais em variáveis quantitativas comparáveis. Assim, parte-se da premissa que as Constituições Estaduais mudam ao longo tempo, se expandindo (fato medido pela quantidade de palavras). Dado que a expansão vem ocorrendo ao longo do tempo, a ideia é verificar se as atuais constituições se expandiram mais do que a média das constituições históricas. Com base nisso, pretende-se verificar se:
 
-A literatura demonstra que, ao longo do tempo, as Constituições tem se alargado. De acordo com Tarr (2006), a história das Constituições Estaduais dos EUA consiste na mudança constitucional. A expansão e evolução das constituições já foi alvo de muito interesse por pesquisadores (DEALEY, 2009; BRYCE, 1995), assim como a expansão em termos de número de palavras, isto é, seu tamanho (LUCE, 2009; DE GRAZIA, 1954; STURM, 1982). A novidade da base trazida por Clouse (2019) é a transformação dos textos constitucionais em variáveis quantitativas comparáveis. Assim, parte-se da premissa que as Constituições Estaduais mudam ao longo tempo, se expandindo (fato medido pela quantidade de palavras). Dado que a expansão vem ocorrendo ao longo do tempo, a ideia é verificar se as atuais constituições se expandiram mais do que a média das constituições históricas. Com base nisso, pretende-se verificar se:
+**H0**: *A variação do número de palavras permance a mesma ao longo das mudanças constitucionais*.
 
-*H0: *A variação do número de palavras permance a mesma ao longo das mudanças constitucionais.
-
-*H1: *Há maior variação no número de palavras das Constituições Estaduais correntes, em relação às Constituições anteriores.
+**H1**: *Há maior variação no número de palavras das Constituições Estaduais correntes, em relação às Constituições anteriores.*
 
 Para isso, foi utilizado o teste-t, que objetiva comparar o tamanho (em termos de número de palavras) das Constituições Atuais e a média do tamanho das Constituições Históricas. Assim, operacionalizou-se como Constituições Históricas a média do número total de palavras de todas as Constituições de cada Estado, excluída a Constituição atual, enquanto as Constituições Atuais foram operacionalizadas a partir do número de palavras das Constituições Estaduais atuais.
 
-Diante dos critérios de reproducibilidade da pesquisa científica, disponibilizamos os códigos usados para este trabalho no github: <https://github.com/isabel-eirado/trabalhofinal.git>
+Diante dos critérios de reproducibilidade da pesquisa científica, disponibilizamos os códigos usados para este trabalho no github - https://github.com/isabel-eirado/trabalhofinal.git
 
 # Visualização e Análise de dados ####
 
@@ -132,10 +131,12 @@ Diante dos critérios de reproducibilidade da pesquisa científica, disponibiliz
 
 [Ana incluir análises]
 
-### Mapa interativo ####
+### Mapa interativo com informações gerais sobre as Constituições Estaduais dos Estados Unidos ####
 
-[Amanda] - introsobre o gráfico
-```{r mapa interativo, warning=FALSE, include=FALSE, echo=FALSE, warning=FALSE, message = FALSE}
+O mapa, a seguir, apresenta graficamente uma escala do número total de palavras das Constituições atuais e, em específico, informações gerais sobre cada Estado: nome, ano de promulgação da Constituição Estadual corrente, total de palavras da Constituição vigente e a quantidade de Constituições que já passaram pelo Estado. 
+
+
+```{r mapa interativo, warning=FALSE, include=FALSE, echo=FALSE, message = FALSE}
 
 # A. Preparando o data.frame "state_const"
 state_const_dados <-  state_const %>%
@@ -203,7 +204,7 @@ mapa_interativo %>%
     textsize = "10px",
     direction = "auto")) %>%
   # 4. Detalhamento do layout do mapa
-  addLegend(pal = pal, values = ~total_words, opacity = 0.7, title = "Número total de palavras", position = "bottomright")
+  addLegend(pal = pal, values = ~total_words, opacity = 0.7, title = "Número total de palavras das Constituições atuais", position = "bottomright")
 # 5. Adicionar uma cor de legenda ao mapa
 
 # Material de apoio: <https://rstudio.github.io/leaflet/choropleths.html>.
@@ -282,7 +283,7 @@ stat_cor(aes(), method = "pearson", label.x = 2) + # Adicionando correlação
        y = "Ano da Constituição") #nomeando os eixos
 ```
 
-### Teste T para comprovar hipótese ####
+### Teste T para verificar as hipóteses ####
 - O teste-t foi utilizado para comparar o tamanho (em termos de número de palavras) das constituições atuais e a média do tamanho das constituições históricas.
 - Criando uma coluna com a Média de Palavras das Constituições Estaduais:
 ```{r, echo=FALSE, message = FALSE}
