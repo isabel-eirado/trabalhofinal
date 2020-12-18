@@ -118,7 +118,7 @@ A literatura demonstra que, ao longo do tempo, as Constituições tem se alargad
 
 Para isso, foi utilizado o teste-t, que objetiva comparar o tamanho (em termos de número de palavras) das Constituições Atuais e a média do tamanho das Constituições Históricas. Assim, operacionalizou-se como Constituições Históricas a média do número total de palavras de todas as Constituições de cada Estado, excluída a Constituição atual, enquanto as Constituições Atuais foram operacionalizadas a partir do número de palavras das Constituições Estaduais atuais.
 
-Diante dos critérios de reproducibilidade da pesquisa científica, disponibilizamos os códigos usados para este trabalho no github - https://github.com/isabel-eirado/trabalhofinal.git
+Diante dos critérios de reproducibilidade da pesquisa científica, disponibilizamos os códigos usados para este trabalho no github: <https://github.com/isabel-eirado/trabalhofinal.git>
 
 # Visualização e Análise de dados ####
 
