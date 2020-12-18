@@ -569,7 +569,7 @@ psych::alpha(tabela_para_alpha, check.keys = TRUE)
 alpha1 <- psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```
 
-A partir do teste, identificamos um alpha de aproximadamente 0,83 indicando excelente métrica e ótima relação entre as variáveis relativas aos Três Poderes. 
+O alpha de interesse é o demonstrado na seção "Reliability analysis" no valor disposto no "raw_alpha". O valor obtido na mensuração é de 0.83. O coficiente Alpha de Cronbach varia entre 0 e 1. Quanto mais próximo de 1, maior consistência interna o índice apresenta. Com o valor obtido, é possível verificar que o grau de consistência interna é bom. Ou seja, é boa a relação entre as variáveis relativas aos Três Poderes. 
 
 # Conclusões ####
 
