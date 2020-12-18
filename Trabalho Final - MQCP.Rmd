@@ -129,7 +129,9 @@ Diante dos critérios de reproducibilidade da pesquisa científica, disponibiliz
 
 ## Análise das mudanças constitucionais pelo número total de palavras nas constituições ####
 
-[Ana incluir análises]
+Para essa seção, apresentamos três gráficos e um mapa interativo que revisitam os achados de Clouse (2019). O mapa interativo permite a visualização dos dados individuais de cada estado, além de apresentar - a partir da variação nas cores de preenchimento - o número total de palavras dispostas em cada Constituição. Outra forma de visualização destes dados está disposta no Gráfico 1, que apresenta o número de palavras nas Constituições estatais vigentes a partir de um gráfico de pontos. Na análise quantitativa sobre as mudanças constitucionais, o Gráfico 2 acompanha a análise anterior, medindo a variação entre as médias a partir do desvio padrão. Por fim, o Gráfico 3 busca uma correlação entre os anos de mudanças constitucionais e o número de palavras em cada texto constitucional. 
+
+
 
 ### Mapa interativo com informações gerais sobre as Constituições Estaduais dos Estados Unidos ####
 
@@ -241,9 +243,10 @@ state_const_current_total_words %>%
 
 
 A partir do gráfico, percebe-se que:
-1. O Alabama é um outlier na medida em que dispõe de um total de palavras absurdamente maior do que qualquer outro estado
+1. O Alabama é um outlier na medida em que dispõe de um total de palavras maior do que qualquer outro estado. A constituição do Alabama tem 339.576 palavras, puxando a média de palavras para cima. O Texas tem a segunda maior Constituição em termos de número de palavras, mas ainda assim, a diferença de palavras entre as duas constituições é de 252.495. 
 2. A Constituição de Vermont é a menor em termos de número de palavras 
-3. O Texas tem a segunda maior Constituição em termos de número de palavras
+3. Observa-se, com exceção do Alabama, que os valores totais de palavras dos textos constituientes tem uma variação menor. A diferença entre o Texas, segundo maior texto constitucional e Vermont, menor texto constitucional, é de 79.169 palavras. 
+
 
 ### Gráfico 2 - Variação do total de palavras das constituições por estado
 O objetivo deste gráfico é observar se o tempo é um fator relevante para gerar mudança no número de palvaras totais das constituições. Sendo assim, mediremos a variação do número de palavras das constituições (a partir do desvio padrão) por estado para, desta forma, poderemos identificar se o total de palavras das constituições de cada estado variou ao longo do tempo ou não. 
