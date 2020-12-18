@@ -271,9 +271,9 @@ filter(state != "Alabama") %>% #removendo o alabama por ser um outlier
 
 
 
-O gráfico apresenta os resultados a partir do cálculo do desvio padrão dos valores de palavras totais de todas as constituições de cada estado dos EUA. Aqui, investiga-se de que forma esse conjunto de dados está variando. 
-A Califórnia é o Estado que apresenta a maior variação em relação a média de palavras totais. Seu valor chega a 123384.56453. 
-Os estados com o menor valor de desvio padrão (Alaska, Minnesota, Wisconsin, Vermont, Indiana e South Dakota) parecem ser os estados com o menor número de mudanças constitucionais. Essa relação será analisada a frente, a partir do gráfico com o número de mudanças constituicionais por estado. 
+1. O gráfico apresenta os resultados a partir do cálculo do desvio padrão dos valores de palavras totais de todas as constituições de cada estado dos EUA. Aqui, investiga-se de que forma esse conjunto de dados está variando. 
+2. A Califórnia é o Estado que apresenta a maior variação em relação a média de palavras totais. Seu valor chega a 123384.56453. 
+3. Os estados com o menor valor de desvio padrão (Alaska, Minnesota, Wisconsin, Vermont, Indiana e South Dakota) parecem ser os estados com o menor número de mudanças constitucionais. Essa relação será analisada a frente, a partir do gráfico com o número de mudanças constituicionais por estado. 
 
 ### Gráfico 3 - Total de palavras por Constituição
 Objetivamos, com esse gráfico, identificar o grau de correlação entre o ano da Constituição e o total de palavras das Constituições, a fim de identificar se há uma mudança constitucional com o aumento de palavras ao longo do tempo.
@@ -383,9 +383,10 @@ const_eua_painel %>%
 ```
 
 
+A partir do Gráfico percebemos que Los Angeles é o Estado com o maior número de constituições, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais. São eles: Alaska, Arizona, Colorado, Hawaii, Idaho, Kansas, Maine, Massachusetts, Minnesota, Nevada, New Mexico, North Dakota, Oklahoma, Oregon, South Dakota, Utah, Wisconsin, Wyoming. 
 
+Enquanto a Califórnia figura como o estado com o maior desvio padrão entre as médias observadas nas estados, o mesmo não se observa no quantitativo das mudanças constitucionais. O estado tem uma posição mediana, mudando suas normas constitucionais apenas 4 vezes. 
 
-A partir do Gráfico percebemos que Los Angeles é o Estado mais propenso a promover mudanças constitucionais, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais, indicando menor propensão a mudanças. São eles: 
 
 ```{r paged.print=TRUE, echo=FALSE, message = FALSE}
 const_eua_painel %>% filter(numero_total_constituicoes ==2)
