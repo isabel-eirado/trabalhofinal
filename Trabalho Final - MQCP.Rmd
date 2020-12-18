@@ -272,7 +272,7 @@ filter(state != "Alabama") %>% #removendo o alabama por ser um outlier
 O gráfico informa que houve variação considerável do número de palavras da Constituição vigente nos estados com relação à média, esta considerando todas as consituições. Portanto, há indícios de que o tempo e o número de palavras contribuem com mudanças constitucionais.
 
 ### Gráfico 3 - Total de palavras por Constituição
-
+Objetivamos, com esse gráfico, identificar o grau de correlação entre o ano da Constituição e o total de palavras das Constituições, a fim de identificar se há uma mudança constitucional com o aumento de palavras ao longo do tempo.
 ```{r, echo=FALSE, warning=FALSE, message = FALSE}
 state_const %>%
 filter(state != "Alabama") %>% #removendo o Alabama para evitar contágio da amostra
@@ -287,6 +287,10 @@ stat_cor(aes(), method = "pearson",
   labs(x = "Total de palavras",
        y = "Ano da Constituição") 
 ```
+
+
+
+Identificamos que há correlação entre o ano da Constituição e o número de palavras, ou seja, as Constituições tendem a crescer em número de palavras ao longo do tempo.
 
 ### Teste T para verificar as hipóteses ####
 O teste-t foi utilizado para comparar o tamanho (em termos de número de palavras) das constituições atuais e a média do tamanho das constituições históricas.
