@@ -243,9 +243,9 @@ state_const_current_total_words %>%
 
 
 A partir do gráfico, percebe-se que:
-1. O Alabama é um outlier na medida em que dispõe de um total de palavras maior do que qualquer outro estado. A constituição do Alabama tem 339.576 palavras, puxando a média de palavras para cima. O Texas tem a segunda maior Constituição em termos de número de palavras, mas ainda assim, a diferença de palavras entre as duas constituições é de 252.495.  Para fins estatísticos, o Alabama foi excluído das análises. 
+1. O Alabama é um outlier na medida em que dispõe de um total de palavras maior do que qualquer outro estado. A constituição do Alabama tem 339.576 palavras, puxando a média de palavras para cima. O Texas tem a segunda maior Constituição em termos de número de palavras, mas ainda assim, a diferença de palavras entre as duas constituições é de 252.495. Por isso, para fins estatísticos, o Alabama foi excluído de algumas das análises posteriores. 
 2. A Constituição de Vermont é a menor em termos de número de palavras 
-3. Observa-se, com exceção do Alabama, que os valores totais de palavras dos textos constituientes tem uma variação menor. A diferença entre o Texas, segundo maior texto constitucional e Vermont, menor texto constitucional, é de 79.169 palavras. 
+3. Observa-se, com exceção do Alabama, que os valores totais de palavras dos textos constituientes tem uma variação menor. A diferença entre o Texas, segundo maior texto constitucional, e Vermont, menor texto constitucional, é de 79.169 palavras. 
 
 
 ### Gráfico 2 - Variação do total de palavras das constituições por estado
@@ -569,7 +569,7 @@ psych::alpha(tabela_para_alpha, check.keys = TRUE)
 alpha1 <- psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```
 
-A partir do teste, identificamos um alpha de 0,83 indicando excelente métrica e ótima relação entre as variáveis relativas aos Três Poderes. 
+A partir do teste, identificamos um alpha de aproximadamente 0,83 indicando excelente métrica e ótima relação entre as variáveis relativas aos Três Poderes. 
 
 # Conclusões ####
 
