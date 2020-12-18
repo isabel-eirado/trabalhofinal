@@ -12,6 +12,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r ativando pacotes, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(readxl)
 library(rmarkdown)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(rmarkdown)
+library (infer)
+library(tidyverse)
+library(tibble)
+library(ggpubr)
+library(devtools)
+devtools::install_github("cardiomoon/webr")
+library(webr)
+library(forcats)
+library(leaflet)
+library(tigris)
+library(sf)
 ```
 
 
@@ -41,7 +56,7 @@ text-align: justify}
 3. Observar, a partir de um índice, a mudança proporcional entre os três poderes nas constituições estaduais
 4. Demonstrar padrões de mudança constituicional ao longo do tempo
 
-- Contextualização (justificativa)
+- Contextualização
 
 A organização do federalismo estadunidense dá às unidades subnacionais considerado potencial para inovações constitucionais e experimentação política ("espaço constitucional"), inclusive em comparação à maior parte de outras federações (BURGESS, TARR e MARKO, 2004).Essa possibilidade de mudança foi utilizada pelos estados de maneira frequente - seja pela substituição completa, seja pelo emendamento das Cartas vigentes. Diferentemente do que ocorre com a Constituição Federal, emendas e mudanças nas Constituições Estaduais são relativamente fáceis, além de congregarem uma gama de atores, tendo um caráter popular mais visível, dado que são propostas ou votadas pela população (ACIR, 1989). 
 
@@ -62,41 +77,101 @@ body {
 text-align: justify}
 </style>
 
-## Preparando a análise
-
-```{r, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
-library(ggplot2)
-library(tidyr)
-library(dplyr)
-library(rmarkdown)
-library (infer)
-library(tidyverse)
-library(tibble)
-library(ggpubr)
-library(devtools)
-devtools::install_github("cardiomoon/webr")
-library(webr)
-library(forcats)
-```
-
-```{r importando os dados, echo=TRUE}
+```{r importando os dados, echo=FALSE}
 state_const <- read_excel("US-State_Constitutions_Dataset_1776-2017.xlsx")
 States_and_Abbreviations <- read_excel("States and Abbreviations.xlsx")
+
+state_const <-  state_const %>%
+  left_join(States_and_Abbreviations, constituicoes_poderes, by = "state")
 ```
 
 # Método ####
 
-- Utilizamos a base de dados construída por Julia Clouse, conforme informações e fontes dispostas na planilha apresentada abaixo: 
-```{r paged.print=TRUE}
-state_cons_sources <- read_excel("state_constitutions_sources.xlsx")
+O US State Constitutions Dataset é composto por 203 Constituições Estaduais que abrange o período de 1776 a 2017, dos quais 153 são Constituições Históricas somadas às 50 Constituições Atuais. Dentre as Constituições Históricas, Clouse (2019) incluiu Constituições Estaduais não-tradicionais, além de oito Constituções que foram adotadas ainda sob o Estado Confederado da América.
+ 
+A partir disso, Clouse (2019) estabeleceu 32 categorias: PREAMBLE, STATE BOUNDARIES, DECLARATION OF RIGHTS, RELIGION, PRIVATE PROPERTY, DISCRIMINATION, SUFFRAGE & ELECTIONS, PEOPLE'S INITIATIVE, REPRESENTATION & APPORTIONMENT, LEGISLATIVE, EXECUTIVE, JUDICIAL, MILITIA, GENERAL OPERATIONS, EDUCATION, TAXATION & FINANCE, BUSINESS & CORPORATIONS, RAILROADS & CANALS, BANKING, SOCIAL REGULATION, PUBLIC GOODS, AGRICULTURE, NATURAL RESOURCES & ENVIRONMENT, ENTITLEMENTS, PUBLIC INSTITUTIONS, STATE LANDS, STATE POWERS, LOCAL GOVERNMENT, FEDERAL GOVERNMENT, AMENDMENT PROCESS, SCHEDULE, POSTSCRIPT.
+ 
+Abaixo é possível visualizar o banco de dados:
 
-state_cons_sources
+```{r banco de dados, echo=FALSE}
+paged_table (state_const)
+```
+ 
+```{r mapa interativo, warning=FALSE, include=FALSE}
+
+# A. Preparando o data.frame "state_const"
+state_const_dados <-  state_const %>%
+  add_count(state) %>% 
+  # 1. Foi adicionada uma coluna com o número total de constituições por estado
+  filter(current_constitution == 1) %>% 
+  # 2. Para viabilizar a visualização no mapa foram filtradas apenas as observações que constam as constituições
+  mutate(sigla = state.abb) 
+  # 3. Foi adicionada uma coluna com as siglas de cada estado
+
+# B. Preparando o data.frame com as informações espaciais dos EUA
+states <- states(cb=T)
+
+# C. Visto que o data.frame "states" tem 56 observações, enquanto "state_const" tem 50, serão eliminados os casos sobressalentes do data.frame "states"
+states <- states %>%
+  filter(NAME!="American Samoa" 
+         & NAME!="Commonwealth of the Northern Mariana Islands" 
+         & NAME!="District of Columbia" 
+         & NAME!="Guam" 
+         & NAME!="Puerto Rico" 
+         & NAME!="United States Virgin Islands")
+
 ```
 
-- Dadas as fontes utilizadas para elaboração da base de dados, utilizamos a função glimpse para conhecer melhor os dados com os quais estamos lidando.
-```{r paged.print=TRUE}
-glimpse(state_const)
+
+```{r mapa interativo 2, echo=FALSE, message=FALSE, warning=FALSE}
+
+# D. Com os data.frames preparados, eles serão condensados usando left_join()
+mapa_interativo <- left_join(states, state_const_dados, by = c("NAME" = "state"))
+
+# E. Com o data.frame pronto, é hora de preparar o mapa interativo
+
+# 1. Foi criado um vetor numérico para definir as escala correspondente ao número de palavras das constituições estaduais
+bins <- c(5000, 10000, 20000, 50000, 100000, Inf)
+
+# 2. A partir do passo anterior, criou-se uma função com "colorBin" para preencher a área do mapa de acordo com o objeto que se deseja verificar (total_words)
+pal <- colorBin("YlOrRd", domain = mapa_interativo$total_words, bins = bins)
+
+# 3. Por fim, criou-se um novo data.frame com o modelo de inserção dos rótulos no mapa
+labels <- sprintf("<strong>%s</strong><br/> CE atual: %g<br/>nº palavras: %g<br/>CEs anteriores: %g", mapa_interativo$NAME, mapa_interativo$constitution_year, mapa_interativo$total_words, mapa_interativo$n) %>% lapply(htmltools::HTML)
+
+# F. A plotagem do mapa interativo
+mapa_interativo %>%
+  leaflet() %>%
+  # 1. Função leaflet() para a criação de mapas interativos
+  setView(-96, 37.8, 4) %>%
+  # 2. SetView() estabelece o ângulo de visualização do mapa
+  addTiles() %>%
+  # 3. Adiciona uma camada de blocos ao mapa
+  addPolygons(fillColor =~pal(total_words),
+  weight = 2,
+  opacity = 0.5,
+  color = "white",
+  dashArray = "3",
+  fillOpacity = 0.7,
+  highlight = highlightOptions(
+    weight = 5,
+    color = "#555",
+    dashArray = "",
+    fillOpacity = 0.7,
+    bringToFront = TRUE),
+  label = labels,
+  labelOptions = labelOptions(
+    style = list("font-weight" = "normal", padding = "3px 8px"),
+    textsize = "10px",
+    direction = "auto")) %>%
+  # 4. Detalhamento do layout do mapa
+  addLegend(pal = pal, values = ~total_words, opacity = 0.7, title = "Número total de palavras", position = "bottomright")
+# 5. Adicionar uma cor de legenda ao mapa
+
+# Material de apoio: <https://rstudio.github.io/leaflet/choropleths.html>.
+
 ```
+
 - Trabalhamos, portanto, com uma variável categórica, o nome dos estados, variável categórica, e o restante de variáveis numéricas, que indicam desde o ano em que a constituição foi promulgada (constitution_year) até o número de palavras dedicadas a determinado elemento em cada constituição (exemplo: número de palavras referentes a declaração de direitos em determinada constituição - declaration_rights). Neste trabalho focaremos nas variáveis:
 1. statehood - informa o ano em que o estado passou a integrar a Federação dos Estados Unidos da América
 2. current_constitution - informa a constituição vigente (1) e as constituições ultrapassadas
@@ -441,12 +516,22 @@ plot(t.test(media_antigas,valor_novas, mu = 0))
 - Por fim, sugerimos para estudos futuros o aprofundamento da análise qualitativaao ponto em que é preciso englobar, para além da quantidade de número de palavras, outros aspectos institucionais, legais e sociais que permitam melhor compreender o processo de mudança constitucional nos 50 estados.
 
 # Referências
-BURGESS, Michael D.; TARR, G. Alan; MARKO, Josef (Ed.). Constitutional dynamics in federal systems: sub-national perspectives. Montreal: McGill-Queen’s University Press, 2012
 
-CLOUSE, J.G. (2019). The U.S. State Constitutions Dataset, 1776-2017 (Feb 2019 Version).
+BRYCE, V.J. *The American Commonwealth: with an induction by G.L. McDowell*, 2 vols. Indianapolis, IL: Liberty Fund, 1995.
 
-CLOUSE, Julia Gervaise-Rubicam. Converting the Texts of the US State Constitutions into Quantifiable Data: A Text Analytics Project. 2019. Tese de Doutorado. George Mason University.
+BURGESS, Michael D.; TARR, G. Alan; MARKO, Josef (Ed.). *Constitutional dynamics in federal systems: sub-national perspectives*. Montreal: McGill-Queen’s University Press, 2012.
 
-TARR, G. Alan. Explaining state constitutional changes. Revista de Investigações Constitucionais, v. 3, n. 2, p. 9-32, 2016.
+CLOUSE, Julia Gervaise-Rubicam. *Converting the Texts of the US State Constitutions into Quantifiable Data: A Text Analytics Project*. 2019. Tese de Doutorado. George Mason University.
 
-WOODWARD-BURNS, Robinson. American Reconstitution: How The States Stabilize American Constitutional Development. 2017.
+DEALEY, J.Q. *Growth of American State Constitutions: From 1776 to the End of the Year 1914*. Ithaca, NY: Cornell University Library, 2009.
+
+DE GRAZIA, A. *State constitutions: Are they growing longer*. State Government, 26(4), 82-83, 1954.
+
+LUCE, R. *Legislative Principles: The History and Theory Behind Lawmaking by Representative Government*. Clark, NJ: The Lawbook Exchange, Ltd, 2009.
+
+STURM, A.L. The development of state constitutions. Publius, 12(1), *State
+constitutional design in federal systems*, 57-98, 1982.
+
+TARR, G. Alan. Explaining state constitutional changes. *Revista de Investigações Constitucionais*, v. 3, n. 2, p. 9-32, 2016.
+
+WOODWARD-BURNS, Robinson. *American Reconstitution: How The States Stabilize American Constitutional Development*. 2017.
