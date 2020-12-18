@@ -20,7 +20,7 @@ the progress of the human mind. As that becomes more developed, more enlightened
 as new discoveries are made, new truths disclosed, and manners and opinions change
 with the circumstances, institutions must advance also, and keep pace with the times.” - Thomas Jefferson, 1816*<
 
-# *Resumo:*
+# Resumo
 
 O objetivo deste trabalho é revistar o Banco de Dados **"US State Constitutions Dataset"**, criado por Julia Gervaise-Rubicam Clouse (CLOUSE, 2019), e propor um novo olhar e análises aos dados ali apresentados. O dataset converte textos constitucionais (historicos e atuais) dos estados dos EUA para dados quantificáveis utilizando-se da categorização destes textos. A ideia do trabalho de Clouse (2019) é analisar a evolução das ideias e prioridades políticas nos 50 estados do país, e analisar a mudança constitucional dos estados ao longo do tempo. Utilizando-se dessa base de dados, este trabalho propõe-se a analisar as mudanças constitucionais a partir do número de palavras totais das constituições e das regras formais que abarcam os três Poderes - Executivo, Legislativo e Judiciário. Conclui-se que há um campo fértil para comparação entre as constituições estaduais e se observam tendências gerais nos tópicos de foco dos estados. O teste de hipótese realizado demonstra que as constituições atuais são maiores e mais abrangentes que as constituições históricas, e foi possível fazer algumas relações entre as variáveis. Pontua-se, por fim, que este tipo de análise se beneficiaria de uma análise qualitativa em profundidade, a fim de melhor avaliar as categorias analíticas e tirar conclusões combinadas entre dados qualitativos e quantitativos.
 
@@ -29,7 +29,7 @@ body {
 text-align: justify}
 </style>
 
-# *Introdução*
+# Introdução
 
 - Objeto: Mudança constitucional no federalismo norte-americano
 
@@ -62,7 +62,7 @@ body {
 text-align: justify}
 </style>
 
-## *Preparando a análise*
+## Preparando a análise
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(ggplot2)
@@ -84,7 +84,7 @@ state_const <- read_excel("US-State_Constitutions_Dataset_1776-2017.xlsx")
 States_and_Abbreviations <- read_excel("States and Abbreviations.xlsx")
 ```
 
-# *Método*
+# Método
 
 - Utilizamos a base de dados construída por Julia Clouse, conforme informações e fontes dispostas na planilha apresentada abaixo: 
 ```{r paged.print=TRUE}
@@ -113,7 +113,7 @@ A literatura demonstra que, ao longo do tempo, as Constituições tem se alargad
 
 Para isso, foi utilizado o teste-t para comparar o tamanho (em termos de número de palavras) das Constituições Atuais e a média do tamanho das Constituições Históricas. Assim, operacionalizou-se como Constituições Históricas a média do número total de palavras de todas as Constituições de cada Estado, excluída a Constituição atual. Enquanto que as Constituições Atuais foram operacionalizadas a partir do número de palavras das Constituições Estaduais atuais.
 
-# *Análise e visualização de dados*
+# Análise e visualização de dados
 
 - Diante do objetivo de compreender as mudanças constitucionais, esta seção será dividida em 3 partes:
 
@@ -173,16 +173,7 @@ state_const_current_total_words %>% ggplot(aes(x=constitution_year)) + # estabel
 - Para iniciar esta análise, criamos uma nova tabela que informa a variação do total de palavras da penúltima constituição para a vigente
   
 ```{r paged.print=TRUE}
-state_const_current_total_words %>% group_by(state) %>% summarise(ds_total_words=sd(total_words)) %>%
-  ggplot(aes(x = constitution_year, 
-             y = fct_inorder(ds_total_words),
-             fill = state_abrev)) + #ao definir o mapping no ggplot, as orientações são globais para todos os outros gráficos que virem a seguir
-  geom_col(alpha = 0.7, width = .65) + 
-  scale_fill_brewer(palette = "Paired") +
-  ggtitle("Variação do total de palavras das constituições por estado") +
-  labs(x = "Ano da Constituição vigente",
-       y = "Desvio padrão do total de palavras das constituições") +
-  theme_minimal()
+
 ```
 
 ## Análise das mudanças constitucionais pelo número de constituições promulgadas
@@ -353,7 +344,7 @@ constituicoes_poderes %>%
 ```
 - A partir do gráfico é possível identificar uma tendência a crescimento do número de palavras que pautam regras formais para os três Poderes.
 
-# *Resultados*
+# Resultados
 
 - Esta seção se propõe a elaborar um teste das hipóteses e reproduzir o teste de confiança - Alpha de Cronbach, para identificar se as variáveis que abordam os poderes estão bem relacionadas.
 
@@ -416,7 +407,7 @@ t.test(x=media_antigas, y=valor_novas, paired = TRUE)
 ```
 
 
-# *Conclusões*
+# Conclusões
 
 - A partir das análises, identificamos que:
 1. (inserir relação encontrada entre variação de palavras e o ano de promulgação)
@@ -434,7 +425,7 @@ t.test(x=media_antigas, y=valor_novas, paired = TRUE)
 
 - Por fim, sugerimos para estudos futuros o aprofundamento da análise qualitativaao ponto em que é preciso englobar, para além da quantidade de número de palavras, outros aspectos institucionais, legais e sociais que permitam melhor compreender o processo de mudança constitucional nos 50 estados.
 
-# *Referências*
+# Referências
 BURGESS, Michael D.; TARR, G. Alan; MARKO, Josef (Ed.). Constitutional dynamics in federal systems: sub-national perspectives. Montreal: McGill-Queen’s University Press, 2012
 
 CLOUSE, J.G. (2019). The U.S. State Constitutions Dataset, 1776-2017 (Feb 2019 Version).
