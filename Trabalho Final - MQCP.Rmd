@@ -283,9 +283,10 @@ stat_cor(aes(), method = "pearson", label.x = 2) + # Adicionando correlação
 ```
 
 ### Teste T para verificar as hipóteses ####
-- O teste-t foi utilizado para comparar o tamanho (em termos de número de palavras) das constituições atuais e a média do tamanho das constituições históricas.
-- Criando uma coluna com a Média de Palavras das Constituições Estaduais:
+O teste-t foi utilizado para comparar o tamanho (em termos de número de palavras) das constituições atuais e a média do tamanho das constituições históricas.
+
 ```{r, echo=FALSE, message = FALSE}
+# Criando uma coluna com a Média de Palavras das Constituições Estaduais
 constituicoes_testehipotese <- state_const %>% 
   select(state, constitution_year, 
   current_constitution, total_words) %>% 
@@ -307,8 +308,9 @@ constituicoes_antigas <- constituicoes_testehipotese %>%
 media_antigas <- constituicoes_antigas$media_total_words
 ```
 
-- Operacionalizando a variável valor_novas
+
 ```{r, echo=FALSE, message = FALSE}
+# Operacionalizando a variável valor_novas
 constituicoes_novas <- constituicoes_testehipotese %>%
   filter(current_constitution == 1) %>%
   select(state, constitution_year, total_words) 
@@ -316,20 +318,20 @@ constituicoes_novas <- constituicoes_testehipotese %>%
 valor_novas <- constituicoes_novas$total_words
 ```
 
-- Realizando o teste T
 ```{r message=TRUE, paged.print=TRUE, echo=FALSE, message = FALSE}
+# Realizando o teste T
 t.test(x=media_antigas, y=valor_novas, paired = TRUE)
 ```
 
 ```{r paged.print=TRUE, echo=FALSE, message = FALSE}
+#Gráfico com o teste t
 plot(t.test(media_antigas,valor_novas, mu = 0))
 ```
 
 
 ## Análise das mudanças constitucionais pelo número de constituições promulgadas
-- Após analisar relações em relação ao número de palavras, segue-se para análise do número de Constituições promulgadas por cada estado dos EUA, identificando o ano da Constituição vigente de cada estado. 
+Após analisar relações quanto ao número de palavras, seguimos para análise do número de Constituições promulgadas por cada estado dos EUA, identificando o ano da Constituição vigente de cada estado. Neste caso, o Alabama não foi excluído por não afetar os resultados para o propósito desta subseção.
 
-- O Alabama não foi excluído dessa análise por não afetar os resultados para o propósito desta subseção.
 ```{r, echo=FALSE, message = FALSE}
 #Criando tabela para analisar o total de constituições de cada estado
 const_eua_painel <- state_const  %>%
@@ -345,6 +347,8 @@ const_eua_painel <- state_const  %>%
 
 
 ### Gráfico 4 - Número de Constituições por cada estado estadunidense ####
+A fim de identificar a quantidade de constituições totais que cada estado da Federação teve e verificar a propensão a mudanças constitucionais a partir desse valor, criamos o Gráfico 4.
+
 ```{r, fig.height=6, fig.width=8, echo=FALSE, warning=FALSE, message = FALSE}
 #Criando gráfico com informações sobre o número de Constituições de cada estado
 const_eua_painel$constitution_year <- as.factor(const_eua_painel$constitution_year)
@@ -366,13 +370,14 @@ const_eua_painel %>%
 
 
 
-- A partir do Gráfico percebemos que Los Angeles é o Estado mais propenso a promover mudanças constitucionais, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais, indicando menor propensão a mudanças. São eles: 
+A partir do Gráfico percebemos que Los Angeles é o Estado mais propenso a promover mudanças constitucionais, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais, indicando menor propensão a mudanças. São eles: 
 
 ```{r paged.print=TRUE, echo=FALSE, message = FALSE}
 const_eua_painel %>% filter(numero_total_constituicoes ==2)
 ```
+
 ### Gráfico 5 - Relação entre número de Constituições por estado e data de criação do estado ####
-- Diante dos dados sobre o total de constituições que cada estado promulgou, objetivamos identificar se há alguma relação entre a criação do estado e o número de constituições promulgadas, isto é, se a data de criação do estado também influencia em sua propensão à mudança constitucional. Para isso criaremos um gráfico de pontos, pois o objetivo é ver a relação entre duas variáveis.
+Diante dos dados sobre o total de constituições que cada estado promulgou, objetivamos identificar se há alguma relação entre a criação do estado e o número de constituições promulgadas, isto é, se a data de criação do estado também influencia em sua propensão à mudança constitucional. Para isso criaremos um gráfico de pontos, pois o objetivo é ver a relação entre duas variáveis.
 
 ```{r, fig.height=6, fig.width=8, echo=FALSE, warning=FALSE, message = FALSE}
 const_eua_painel %>% 
@@ -386,9 +391,11 @@ const_eua_painel %>%
 
 
 
-- Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e a propensão a mudança constitucional pela análise da quantidade total de constituições promulgadas. 
+Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e a propensão a mudança constitucional pela análise da quantidade total de constituições promulgadas. 
 
 ### Gráfico 6 - Correlação entre o numero de constituições e a data de criação do estado
+
+
 ```{r, fig.height=6, fig.width=6, echo=FALSE, warning=FALSE, message = FALSE}
 state_const %>% 
   add_count(state) %>%
@@ -449,9 +456,9 @@ constituicoes_poderes <- state_const %>%
 ##criando o índice de mudança proporcional do judiciário em relação à soma dos poderes
 ```
 
-- A fim de identificarmos a relação entre a quantidade de palavras em cada Constituição referente aos poderes e o ano de promulgação das constituições, elaboramos o gráfico a seguir.
 
 ### Gráfico 7 - Relação entre os poderes e as constituições promulgadas por estado ####
+A fim de identificarmos a relação entre a quantidade de palavras em cada Constituição referente aos poderes e o ano de promulgação das constituições, elaboramos o gráfico 7.
 ```{r,  fig.height=5, fig.width=8, echo=FALSE, warning=FALSE, message = FALSE}
 constituicoes_poderes %>%
   ggplot(aes(x = constitution_year,
@@ -465,11 +472,11 @@ constituicoes_poderes %>%
 
 
 
-- A partir do gráfico é possível identificar que há uma tendência a aumentar o número de regras formais voltadas aos três poderes ao longo do tempo.
-
-- Manipulando os dados e apresentando visualização dos dados a fim de identificar o valor de cada um dos índices de mudança proporcional por estado e ano de promulgação da Constituição. Com essa análise, será possível compreender a evolução ao longo do tempo da participação de cada um dos poderes na Constituição em termos de palavras.
+A partir do gráfico é possível identificar que há uma tendência a aumentar o número de regras formais voltadas aos três poderes ao longo do tempo.
 
 ### Gráfico 8 - Indices por ano constitucional e estado ####
+Com o objetivo de identificar a relação entre o valor de cada um dos índices de mudança proporcional por estado e ano de promulgação da Constituição foi criado o gráfico 8. A partir dessa análise será possível compreender a evolução ao longo do tempo da participação de cada um dos poderes na Constituição em termos de palavras.
+
 ```{r echo=FALSE, fig.height=5, fig.width=9, paged.print=TRUE, warning=FALSE, message = FALSE}
 constituicoes_poderes_grafico5 <- constituicoes_poderes %>% 
 select(constitution_year, abbreviation, imp_l, imp_e, imp_j) %>% #selecionando as variáveis de interesse
@@ -502,10 +509,10 @@ constituicoes_poderes_grafico5 %>%ggplot(aes(x= constitution_year, y= valores, g
 
 
 
-- Analisando o gráfico é possível identificar tendência a crescimento da participação constitucional dos poderes no tangente à quantidade de palavras referentes a eles.
+Analisando o gráfico é possível identificar tendência a crescimento da participação constitucional dos poderes no tangente à quantidade de palavras referentes a eles.
 
 ### Gráfico 9 - Poderes pelo ano da Constituição ####
-- Por fim, analisamos se o total de palavras referentes aos três poderes cresceu ao longo do tempo.
+Por fim, analisamos se o total de palavras referentes aos três poderes cresceu ao longo do tempo.
 ```{r fig.height=5, fig.width=9, paged.print=TRUE, echo=FALSE, warning=FALSE, message = FALSE}
 constituicoes_poderes %>%
   ggplot(aes(constitution_year, poderes)) + #selecionando os eixos ano da constituicao e da variavel de interesse (poderes)
@@ -523,12 +530,12 @@ constituicoes_poderes %>%
 
 
 
-- A partir do gráfico é possível identificar uma tendência a crescimento do número de palavras que pautam regras formais para os três Poderes.
+A partir do gráfico é possível identificar uma tendência a crescimento do número de palavras que pautam regras formais para os três Poderes.
 
 ### TESTE DE CONFIANÇA - Alpha de Cronbach a partir dos IMPs ####
 
 [Explicação tabela alpha Ana]
-- Elaboramos o teste de confiança pelo Alpha de Cronbach a fim de identificar se as variáveis relativas aos Índices de Mudança Proporcional estão bem relacionadas.
+Elaboramos o teste de confiança pelo Alpha de Cronbach a fim de identificar se as variáveis relativas aos Índices de Mudança Proporcional estão bem relacionadas.
 ```{r, echo=FALSE, warning=FALSE, message = FALSE}
 library(psych) #baixando o pacote psych
 
