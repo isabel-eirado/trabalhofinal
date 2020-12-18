@@ -269,17 +269,20 @@ filter(state != "Alabama") %>% #removendo o alabama por ser um outlier
 O gráfico informa que houve variação considerável do número de palavras da Constituição vigente nos estados com relação à média, esta considerando todas as consituições. Portanto, há indícios de que o tempo e o número de palavras contribuem com mudanças constitucionais.
 
 ### Gráfico 3 - Total de palavras por Constituição
-[Amanda ajustar posição R]
+
 ```{r, echo=FALSE, warning=FALSE, message = FALSE}
 state_const %>%
 filter(state != "Alabama") %>% #removendo o Alabama para evitar contágio da amostra
 ggscatter(x = "total_words",
 y = "constitution_year",
 add = "reg.line", # Adicionando linha de regressão
-conf.int = TRUE) +
-stat_cor(aes(), method = "pearson", label.x = 2) + # Adicionando correlação
+conf.int = TRUE,
+legend = "bottom") +
+stat_cor(aes(), method = "pearson",
+         label.x = 25000,
+         label.y = 2100) +
   labs(x = "Total de palavras",
-       y = "Ano da Constituição") #nomeando os eixos
+       y = "Ano da Constituição") 
 ```
 
 ### Teste T para verificar as hipóteses ####
