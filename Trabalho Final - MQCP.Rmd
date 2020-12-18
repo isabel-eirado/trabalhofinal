@@ -243,7 +243,7 @@ state_const_current_total_words %>%
 
 
 A partir do gráfico, percebe-se que:
-1. O Alabama é um outlier na medida em que dispõe de um total de palavras maior do que qualquer outro estado. A constituição do Alabama tem 339.576 palavras, puxando a média de palavras para cima. O Texas tem a segunda maior Constituição em termos de número de palavras, mas ainda assim, a diferença de palavras entre as duas constituições é de 252.495. 
+1. O Alabama é um outlier na medida em que dispõe de um total de palavras maior do que qualquer outro estado. A constituição do Alabama tem 339.576 palavras, puxando a média de palavras para cima. O Texas tem a segunda maior Constituição em termos de número de palavras, mas ainda assim, a diferença de palavras entre as duas constituições é de 252.495.  Para fins estatísticos, o Alabama foi excluído das análises. 
 2. A Constituição de Vermont é a menor em termos de número de palavras 
 3. Observa-se, com exceção do Alabama, que os valores totais de palavras dos textos constituientes tem uma variação menor. A diferença entre o Texas, segundo maior texto constitucional e Vermont, menor texto constitucional, é de 79.169 palavras. 
 
@@ -271,8 +271,9 @@ filter(state != "Alabama") %>% #removendo o alabama por ser um outlier
 
 
 
-
-O gráfico informa que houve variação considerável do número de palavras da Constituição vigente nos estados com relação à média, esta considerando todas as consituições. Portanto, há indícios de que o tempo e o número de palavras contribuem com mudanças constitucionais.
+O gráfico apresenta os resultados a partir do cálculo do desvio padrão dos valores de palavras totais de todas as constituições de cada estado dos EUA. Aqui, investiga-se de que forma esse conjunto de dados está variando. 
+A Califórnia é o Estado que apresenta a maior variação em relação a média de palavras totais. Seu valor chega a 123384.56453. 
+Os estados com o menor valor de desvio padrão (Alaska, Minnesota, Wisconsin, Vermont, Indiana e South Dakota) parecem ser os estados com o menor número de mudanças constitucionais. Essa relação será analisada a frente, a partir do gráfico com o número de mudanças constituicionais por estado. 
 
 ### Gráfico 3 - Total de palavras por Constituição
 Objetivamos, com esse gráfico, identificar o grau de correlação entre o ano da Constituição e o total de palavras das Constituições, a fim de identificar se há uma mudança constitucional com o aumento de palavras ao longo do tempo.
