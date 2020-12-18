@@ -544,7 +544,6 @@ A partir do gráfico é possível identificar uma tendência a crescimento do n�
 
 ### TESTE DE CONFIANÇA - Alpha de Cronbach a partir dos IMPs ####
 
-[Explicação tabela alpha Ana]
 Elaboramos o teste de confiança pelo Alpha de Cronbach a fim de identificar se as variáveis relativas aos Índices de Mudança Proporcional estão bem relacionadas.
 ```{r, echo=FALSE, warning=FALSE, message = FALSE}
 library(psych) #baixando o pacote psych
@@ -565,6 +564,7 @@ psych::alpha(tabela_para_alpha, check.keys = TRUE)
 alpha1 <- psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```
 
+A partir do teste, identificamos um alpha de 0,83 indicando excelente métrica e ótima relação entre as variáveis relativas os Três Poderes. 
 
 # Conclusões ####
 
