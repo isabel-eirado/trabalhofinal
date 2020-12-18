@@ -170,7 +170,7 @@ state_const_current_total_words %>% ggplot(aes(x=constitution_year)) + # estabel
   geom_density(color="black", size=1)+ #definindo a cor e o tamanho da linha
   scale_x_continuous() + #definindo os valores a serem expostos no eixo x
   theme_classic() +  #estabelecendo o tema do gráfico para um modelo com fundo branco
-  labs(title = "Promulgação de constituições ao longo do tempo",
+  labs(title = "Gráfico 2 - Promulgação de constituições ao longo do tempo",
        x = "Ano de promulgação",
        y = "densidade") #nomeando os eixos
 ```
@@ -202,7 +202,7 @@ const_eua_painel <- state_const  %>%
   arrange(desc(numero_total_constituicoes)) #ordenando a tabela
 ```
 
-- Visualizando os dados.
+### Gráfico 4 - Número de Constituições promulgadas por cada estado estadunidense ####
 ```{r, fig.height=6, fig.width=8}
 #Criando gráfico com informações sobre o número de Constituições de cada estado
 const_eua_painel$constitution_year <- as.factor(const_eua_painel$constitution_year)
@@ -215,18 +215,20 @@ const_eua_painel %>%
   geom_col(alpha = 0.7, width = .65) + 
   scale_x_continuous(breaks = seq(0,12, 2)) +
   scale_fill_brewer(palette = "Paired") +
-  ggtitle("Número de Constituições promulgadas por cada estado estadunidense") +
+  ggtitle("Gráfico 4 - Número de Constituições promulgadas por cada estado estadunidense") +
   labs(x = "Número de Constituições aprovadas",
        y = "Siglas dos estados") +
   theme_minimal()
 
 ```
+
+***
 - A partir do Gráfico percebemos que Los Angeles é o Estado mais propenso a promover mudanças constitucionais, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais, indicando menor propensão a mudanças. São eles: 
 
 ```{r paged.print=TRUE}
 const_eua_painel %>% filter(numero_total_constituicoes ==2)
 ```
-
+### Gráfico 5 - Relação entre número de Constituições promulgadas por estado e data de criação do estado ####
 - Diante dos dados sobre o total de constituições que cada estado promulgou, objetivamos identificar se há alguma relação entre a criação do estado e o número de constituições promulgadas, isto é, se a data de criação do estado também influencia em sua propensão à mudança constitucional. Para isso criaremos um gráfico de pontos, pois o objetivo é ver a relação entre duas variáveis.
 
 ```{r, fig.height=6, fig.width=8}
@@ -234,14 +236,15 @@ const_eua_painel %>%
   ggplot(aes(x=statehood, y= numero_total_constituicoes)) + #definindo os dados a serem projetados nos eixos x e y e ordenamento a partir do eixo y
   geom_point(color="red", size=1, fill="red") +#definindo a geometria scatter com cor de contorno e preenchimento vermelhas e o tamanho do preenchimento
  geom_text(aes(label=state_abrev), colour = "black", size = 3, vjust = 1.5, position = position_dodge(.9), check_overlap = TRUE)+ #etiquetando o nome do estado para cada ponto no gráfico e usando check_overlap para que nenhuma etiqueta se sobreponha
-  ggtitle("Relação entre número de Constituições promulgadas por estado e data de criação do estado") +
+  ggtitle("Gráfico 5 - Relação entre número de Constituições promulgadas por estado e data de criação do estado") +
   labs(x = "Data de criação do estado",
        y = "Número de Constituições totais do estado") +
   theme_classic()  #definindo o tema classico
 ```
+***
 - Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e a propensão a mudança constitucional pela análise da quantidade total de constituições promulgadas. 
 
-## Análise das mudanças constitucionais a partir do Índice de Mudança Proporcional dos Poderes
+## Análise das mudanças constitucionais a partir do Índice de Mudança Proporcional dos Poderes ####
 
 O objetivo desta subseção é fazer uma exploração dos dados a partir de três variáveis: **Lesislative**, **Executive**, e **Judicial**. Para explorar essa relação criamos o Índice de Mudança Proporcional dos Poderes:
 
@@ -269,10 +272,11 @@ ONDE:
 - executive, legislative e judicial = quantidade de palavras destinada respectivamente às categorias "Executive", "Legislative" e "Judicial" em cada constituição
 - powers = somatório das palavras destinadas aos três poderes - Executivo + Legislativo + Judiciário - em cada constituição
 
-O Objetivo deste índice é fornecer medida de porporção de cada um dos poderes em relação ao total dedicado aos três em cada constituição adotada ou emendada pelos 50 estados. Deste modo, espera-se observar se existe proporcionalidade entre eles, ou seja, se há um equilíbrio, necessário ao mecanismo de Checks and Balances, ou se a presença (aqui entendida como o número de palavras dedicadas a eles) de cada um dos poderes nas constituições foi se alterando ao longo do tempo de forma desigual.
+Este índice fornece a medida de porporção de cada um dos poderes em relação ao total dedicado aos três em cada constituição adotada ou emendada pelos 50 estados. Deste modo, espera-se observar se existe proporcionalidade entre eles, ou seja, se há um equilíbrio, necessário ao mecanismo de Checks and Balances, ou se a presença (aqui entendida como o número de palavras dedicadas a eles) de cada um dos poderes nas constituições foi se alterando ao longo do tempo de forma desigual.
 
-- Para elaborar a análise criamos uma nova tabela e manipulamos os dados
+
 ```{r}
+#Manipulando os dados: criando tabela com os índices
 constituicoes_poderes <- state_const %>% 
   ##criando um novo data frame com as manipulações
   select(state, constitution_year,current_constitution, 
