@@ -294,7 +294,8 @@ stat_cor(aes(), method = "pearson",
 
 
 
-Identificamos que há correlação entre o ano da Constituição e o número de palavras, ou seja, as Constituições tendem a crescer em número de palavras ao longo do tempo.
+Na correlação de Pearson acima, o R = 0,61. Há uma correlação moderada entre as observações. Apesar de uma notável proximidade entre os números de palavras nas constituições entre os anos de 1800 e 1900, as mudanças posteriores não apresentam um padrão contínuo de crescimento. As mudanças mais recentes tem valores totais de palavras dispersos entre si. 
+
 
 ### Teste T para verificar as hipóteses ####
 O teste-t foi utilizado para comparar o tamanho (em termos de número de palavras) das constituições atuais e a média do tamanho das constituições históricas.
