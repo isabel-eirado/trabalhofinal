@@ -91,7 +91,9 @@ A partir disso, Clouse (2019) estabeleceu 32 categorias: PREAMBLE, STATE BOUNDAR
 Abaixo é possível visualizar o banco de dados:
 
 ```{r banco de dados, echo=FALSE, paged.print=TRUE}
-paged_table (state_const)
+state_const %>% #selecionando o dataframe
+  arrange(state) %>% #ordem alfabética por estado
+  paged_table (state_const) #imprimindo a tabela 
 ```
 
 - Trabalhamos, portanto, com duas variáveis categóricas, o nome dos estados e a variável "constituição atual" (igual a 0, para constituições históricas, igual a 1 para constituições vigentes). As demais variáveis são numéricas, que indicam desde o ano em que a constituição foi promulgada (constitution_year) até o número de palavras dedicadas a determinado elemento em cada constituição (exemplo: número de palavras referentes a declaração de direitos em determinada constituição - declaration_rights). Neste trabalho focaremos nas variáveis:
