@@ -87,7 +87,7 @@ state_const <- read_excel("US-State_Constitutions_Dataset_1776-2017.xlsx")
 States_and_Abbreviations <- read_excel("States and Abbreviations.xlsx")
 
 state_const <-  state_const %>%
-  left_join(States_and_Abbreviations, constituicoes_poderes, by = "state") 
+  left_join(States_and_Abbreviations, state_const, by = "state") 
 ```
 
 Abaixo é possível visualizar o banco de dados elaborado por ela:
