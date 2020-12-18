@@ -221,10 +221,9 @@ select(state, constitution_year, current_constitution, total_words, state_number
   filter(current_constitution == 1) #filtrando apenas as constituições vigentes
 ```
 
-- Em primeiro lugar, queremos identificar a variação do número de palavras das constituições vigentes em cada Estado, a partir de um gráfico de pontos (scatter chart), a fim de observar a distribuição do número de palavras nas constituições de cada estado; e, a partir das variáveis em foco (total_words e state) evidenciar a distribuição de palavras nas constituições dos Estados.
-
 
 ### Gráfico 1 - Total de palavras das constituições vigentes por estado ####
+A fim de identificar a diferença do número de palavras das constituições vigentes em cada Estado, criamos um gráfico de pontos (scatter chart). A partir das variáveis em foco (total_words e state) é possível evidenciar a distribuição de palavras nas constituições dos Estados.
 ```{r paged.print=TRUE, echo=FALSE, warning=FALSE, message = FALSE}
 options(scipen = 999)
 state_const_current_total_words %>% 
