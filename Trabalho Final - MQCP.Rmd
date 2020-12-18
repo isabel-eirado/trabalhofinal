@@ -403,8 +403,8 @@ const_eua_painel %>%
 
 Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e a propensão a mudança constitucional pela análise da quantidade total de constituições promulgadas. 
 
-### Gráfico 6 - Correlação entre o numero de constituições e a data de criação do estado
-
+### Gráfico 6 - Correlação entre o número de constituições e a data de criação do estado
+Este gráfico foi elaborado com o objetivo de medir a correlação entre o número de constituições que cada estado já teve aprovada e a data de criação do Estado. A partir desses dados será possível inferir se há correlação entre essas duas variáveis - número de constituições e data de criação do estado, ou seja, se estados mais antigos são mais propensos a romoverem mudanças constitucionais.
 
 ```{r, fig.height=6, fig.width=6, echo=FALSE, warning=FALSE, message = FALSE}
 state_const %>% 
@@ -415,10 +415,10 @@ state_const %>%
             add = "reg.line", # Adicionando linha de regressão
             conf.int = TRUE) + 
   stat_cor(aes(), method = "pearson", label.x = 2) + # Adicionando correlação
-   labs(x = "Data de criação do estado",
-       y = "Número de Constituições") 
+   labs(x = "Número de Constituições",
+       y = "Data de criação do estado") 
 ```
-
+Dada a dispersão do gráfico e como o p-valor é menor do que 0,05, é possível descartar a hipótese de que quanto mais antiga a data de criação do estado mais propenso ele é a promover mudanças constitucionais. 
 
 ## Análise das mudanças constitucionais a partir do Índice de Mudança Proporcional dos Poderes ####
 
