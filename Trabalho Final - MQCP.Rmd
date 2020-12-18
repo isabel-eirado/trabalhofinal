@@ -564,7 +564,7 @@ psych::alpha(tabela_para_alpha, check.keys = TRUE)
 alpha1 <- psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```
 
-A partir do teste, identificamos um alpha de 0,83 indicando excelente métrica e ótima relação entre as variáveis relativas os Três Poderes. 
+A partir do teste, identificamos um alpha de 0,83 indicando excelente métrica e ótima relação entre as variáveis relativas aos Três Poderes. 
 
 # Conclusões ####
 
