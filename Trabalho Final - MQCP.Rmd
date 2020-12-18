@@ -220,7 +220,7 @@ select(state, constitution_year, current_constitution, total_words, state_number
 
 
 ### Gráfico 1 - Total de palavras das constituições vigentes por estado ####
-```{r paged.print=TRUE, echo=FALSE}
+```{r paged.print=TRUE, echo=FALSE, warning=FALSE}
 options(scipen = 999)
 state_const_current_total_words %>% 
   mutate(abbreviation=fct_reorder(abbreviation, total_words)) %>%
@@ -245,7 +245,7 @@ state_const_current_total_words %>%
 - A análise da variação do número de palavras pode indicar correlações entre o ano e o número de palavras e nos ajudar a compreender as mudanças constitucionais a partir do número de palavras, bem como se houve influência do ano nesse indicador.
 
   
-```{r paged.print=TRUE, echo=FALSE, fig.height=6, fig.width=8}
+```{r paged.print=TRUE, echo=FALSE, fig.height=6, fig.width=8, warning=FALSE}
 var_words <- state_const %>%
   group_by(state) %>%
   mutate(dp_total_words = sd(total_words)) %>% #criando coluna com o desvio padrão do total de palavras por estado
@@ -265,7 +265,7 @@ filter(state != "Alabama") %>% #removendo o alabama por ser um outlier
 
 ### Gráfico 3 - Total de palavras por Constituição
 [Amanda ajustar posição R]
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 state_const %>%
 filter(state != "Alabama") %>% #removendo o Alabama para evitar contágio da amostra
 ggscatter(x = "total_words",
@@ -340,7 +340,7 @@ const_eua_painel <- state_const  %>%
 
 
 ### Gráfico 4 - Número de Constituições por cada estado estadunidense ####
-```{r, fig.height=6, fig.width=8, echo=FALSE}
+```{r, fig.height=6, fig.width=8, echo=FALSE, warning=FALSE}
 #Criando gráfico com informações sobre o número de Constituições de cada estado
 const_eua_painel$constitution_year <- as.factor(const_eua_painel$constitution_year)
  
@@ -367,7 +367,7 @@ const_eua_painel %>% filter(numero_total_constituicoes ==2)
 ### Gráfico 5 - Relação entre número de Constituições por estado e data de criação do estado ####
 - Diante dos dados sobre o total de constituições que cada estado promulgou, objetivamos identificar se há alguma relação entre a criação do estado e o número de constituições promulgadas, isto é, se a data de criação do estado também influencia em sua propensão à mudança constitucional. Para isso criaremos um gráfico de pontos, pois o objetivo é ver a relação entre duas variáveis.
 
-```{r, fig.height=6, fig.width=8, echo=FALSE}
+```{r, fig.height=6, fig.width=8, echo=FALSE, warning=FALSE}
 const_eua_painel %>% 
   ggplot(aes(x=statehood, y= numero_total_constituicoes)) + #definindo os dados a serem projetados nos eixos x e y e ordenamento a partir do eixo y
   geom_point(color="red", size=1, fill="red") +#definindo a geometria scatter com cor de contorno e preenchimento vermelhas e o tamanho do preenchimento
@@ -382,7 +382,7 @@ const_eua_painel %>%
 - Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e a propensão a mudança constitucional pela análise da quantidade total de constituições promulgadas. 
 
 ### Gráfico 6 - Correlação entre o numero de constituições e a data de criação do estado
-```{r, fig.height=6, fig.width=6, echo=FALSE}
+```{r, fig.height=6, fig.width=6, echo=FALSE, warning=FALSE}
 state_const %>% 
   add_count(state) %>%
   filter(current_constitution == 1) %>% 
@@ -445,7 +445,7 @@ constituicoes_poderes <- state_const %>%
 - A fim de identificarmos a relação entre a quantidade de palavras em cada constituição referente aos poderes e o ano de promulgação das constituições, elaboramos o gráfico a seguir.
 
 ### Gráfico 7 - Relação entre os poderes e as constituições promulgadas por estado ####
-```{r,  fig.height=5, fig.width=8, echo=FALSE}
+```{r,  fig.height=5, fig.width=8, echo=FALSE, warning=FALSE}
 constituicoes_poderes %>%
   ggplot(aes(x = constitution_year,
              y = poderes)) + #determinando os eixos x e y
@@ -463,7 +463,7 @@ constituicoes_poderes %>%
 - Manipulando os dados e apresentando visualização dos dados a fim de identificar o valor de cada um dos índices de mudança proporcional por estado e ano de promulgação da constituição. Com essa análise, será possível compreender a evolução ao longo do tempo da participação de cada um dos poderes na constituição em termos de palavras.
 
 ### Gráfico 8 - Indices por ano constitucional e estado ####
-```{r echo=FALSE, fig.height=5, fig.width=9, paged.print=TRUE}
+```{r echo=FALSE, fig.height=5, fig.width=9, paged.print=TRUE, warning=FALSE}
 constituicoes_poderes_grafico5 <- constituicoes_poderes %>% 
 select(constitution_year, abbreviation, imp_l, imp_e, imp_j) %>% #selecionando as variáveis de interesse
   pivot_longer(cols=3:5, names_to = "indices", values_to = "valores") 
@@ -499,7 +499,7 @@ constituicoes_poderes_grafico5 %>%ggplot(aes(x= constitution_year, y= valores, g
 
 ### Gráfico 9 - Poderes pelo ano da Constituição ####
 - Por fim, analisamos se o total de palavras referentes aos três poderes cresceu ao longo do tempo.
-```{r fig.height=5, fig.width=9, paged.print=TRUE, echo=FALSE}
+```{r fig.height=5, fig.width=9, paged.print=TRUE, echo=FALSE, warning=FALSE}
 constituicoes_poderes %>%
   ggplot(aes(constitution_year, poderes)) + #selecionando os eixos ano da constituicao e da variavel de interesse (poderes)
   geom_line(color = "steelblue", size = 1) + #determinando a cor e tamanho da linha
