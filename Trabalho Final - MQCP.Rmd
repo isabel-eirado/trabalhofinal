@@ -337,6 +337,7 @@ valor_novas <- constituicoes_novas$total_words
 # Realizando o teste T
 t.test(x=media_antigas, y=valor_novas, paired = TRUE)
 ```
+Como nossas observações são dependentes, ou seja, a mesma observação observada em t0 (média de palavras nas constituições antigas) e t1 (número de palavras nas constituições atuais), utilizou-se o argumento de "paired=TRUE" para a realização do teste. Buscava-se analisar se haveria uma igualdade (h0) nas médias do total de palavras por estado. O T teste é um teste estatístico que tem valores entre 0 e 1 e tem como finalidade a comparação das igualdades entre duas médias.  O p valor obtido pelo teste é igual a 0.0009796, o que sugere a rejeição da igualdade (h0) entre as médias em t0 e t1. 
 
 ```{r paged.print=TRUE, echo=FALSE, message = FALSE}
 #Gráfico com o teste t
@@ -383,9 +384,9 @@ const_eua_painel %>%
 ```
 
 
-A partir do Gráfico percebemos que Los Angeles é o Estado com o maior número de constituições, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais. São eles: Alaska, Arizona, Colorado, Hawaii, Idaho, Kansas, Maine, Massachusetts, Minnesota, Nevada, New Mexico, North Dakota, Oklahoma, Oregon, South Dakota, Utah, Wisconsin, Wyoming. 
+1. A partir do Gráfico percebemos que Los Angeles é o Estado com o maior número de constituições, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais. São eles: Alaska, Arizona, Colorado, Hawaii, Idaho, Kansas, Maine, Massachusetts, Minnesota, Nevada, New Mexico, North Dakota, Oklahoma, Oregon, South Dakota, Utah, Wisconsin, Wyoming. 
 
-Enquanto a Califórnia figura como o estado com o maior desvio padrão entre as médias observadas nas estados, o mesmo não se observa no quantitativo das mudanças constitucionais. O estado tem uma posição mediana, mudando suas normas constitucionais apenas 4 vezes. 
+2. Enquanto a Califórnia figura como o estado com o maior desvio padrão entre as médias observadas nas estados, o mesmo não se observa no quantitativo das mudanças constitucionais. O estado tem uma posição mediana, mudando suas normas constitucionais apenas 4 vezes. 
 
 
 ```{r paged.print=TRUE, echo=FALSE, message = FALSE}
