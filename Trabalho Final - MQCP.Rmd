@@ -337,12 +337,15 @@ valor_novas <- constituicoes_novas$total_words
 # Realizando o teste T
 t.test(x=media_antigas, y=valor_novas, paired = TRUE)
 ```
+
 Como nossas observações são dependentes, ou seja, a mesma observação observada em t0 (média de palavras nas constituições antigas) e t1 (número de palavras nas constituições atuais), utilizou-se o argumento de "paired=TRUE" para a realização do teste. Buscava-se analisar se haveria uma igualdade (h0) nas médias do total de palavras por estado. O T teste é um teste estatístico que tem valores entre 0 e 1 e tem como finalidade a comparação das igualdades entre duas médias.  O p valor obtido pelo teste é igual a 0.0009796, o que sugere a rejeição da igualdade (h0) entre as médias em t0 e t1. 
 
 ```{r paged.print=TRUE, echo=FALSE, message = FALSE}
 #Gráfico com o teste t
 plot(t.test(media_antigas,valor_novas, mu = 0))
 ```
+
+
 
 
 ## Análise das mudanças constitucionais pelo número de constituições promulgadas
@@ -363,7 +366,7 @@ const_eua_painel <- state_const  %>%
 
 
 ### Gráfico 4 - Número de Constituições por cada estado estadunidense ####
-A fim de identificar a quantidade de constituições totais que cada estado da Federação teve e verificar a propensão a mudanças constitucionais a partir desse valor, criamos o Gráfico 4.
+A fim de identificar a quantidade de constituições totais que cada estado da Federação teve e verificar o grau de mudanças constitucionais a partir desse valor, criamos o Gráfico 4.
 
 ```{r, fig.height=6, fig.width=8, echo=FALSE, warning=FALSE, message = FALSE}
 #Criando gráfico com informações sobre o número de Constituições de cada estado
@@ -384,17 +387,18 @@ const_eua_painel %>%
 ```
 
 
-1. A partir do Gráfico percebemos que Los Angeles é o Estado com o maior número de constituições, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais. São eles: Alaska, Arizona, Colorado, Hawaii, Idaho, Kansas, Maine, Massachusetts, Minnesota, Nevada, New Mexico, North Dakota, Oklahoma, Oregon, South Dakota, Utah, Wisconsin, Wyoming. 
 
-2. Enquanto a Califórnia figura como o estado com o maior desvio padrão entre as médias observadas nas estados, o mesmo não se observa no quantitativo das mudanças constitucionais. O estado tem uma posição mediana, mudando suas normas constitucionais apenas 4 vezes. 
 
+1. A partir do Gráfico percebemos que Louisiana é o Estado com o maior número de constituições, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais. São eles: 
 
 ```{r paged.print=TRUE, echo=FALSE, message = FALSE}
 const_eua_painel %>% filter(numero_total_constituicoes ==2)
 ```
 
+2. Enquanto a Califórnia figura como o estado com o maior desvio padrão entre as médias observadas nas estados, isto não se observa no quantitativo das mudanças constitucionais. O estado tem uma posição mediana, mudando suas normas constitucionais apenas 4 vezes. 
+
 ### Gráfico 5 - Relação entre número de Constituições por estado e data de criação do estado ####
-Diante dos dados sobre o total de constituições que cada estado promulgou, objetivamos identificar se há alguma relação entre a criação do estado e o número de constituições promulgadas, isto é, se a data de criação do estado também influencia em sua propensão à mudança constitucional. Para isso criaremos um gráfico de pontos, pois o objetivo é ver a relação entre duas variáveis.
+Diante dos dados sobre o total de constituições que cada estado promulgou, objetivamos identificar se há alguma relação entre a criação do estado e o número de constituições promulgadas, isto é, se a data de criação do estado também influencia nas mudanças constitucionais. Para isso criaremos um gráfico de pontos, pois o objetivo é ver a relação entre duas variáveis.
 
 ```{r, fig.height=6, fig.width=8, echo=FALSE, warning=FALSE, message = FALSE}
 const_eua_painel %>% 
@@ -408,10 +412,10 @@ const_eua_painel %>%
 
 
 
-Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e a propensão a mudança constitucional pela análise da quantidade total de constituições promulgadas. 
+Dada a dispersão entre os pontos do gráfico, não foi possível notar relação entre a data de criação do estado e as mudanças constitucionais pela análise da quantidade total de constituições promulgadas. 
 
 ### Gráfico 6 - Correlação entre o número de constituições e a data de criação do estado
-Este gráfico foi elaborado com o objetivo de medir a correlação entre o número de constituições que cada estado já teve aprovada e a data de criação do Estado. A partir desses dados será possível inferir se há correlação entre essas duas variáveis - número de constituições e data de criação do estado, ou seja, se estados mais antigos são mais propensos a romoverem mudanças constitucionais.
+Este gráfico foi elaborado com o objetivo de medir a correlação entre o número de constituições que cada estado já teve aprovada e a data de criação do Estado. A partir desses dados será possível inferir se há correlação entre essas duas variáveis - número de constituições e data de criação do estado, ou seja, se estados mais antigos promovem mais mudanças constitucionais.
 
 ```{r, fig.height=6, fig.width=6, echo=FALSE, warning=FALSE, message = FALSE}
 state_const %>% 
@@ -425,7 +429,10 @@ state_const %>%
    labs(x = "Número de Constituições",
        y = "Data de criação do estado") 
 ```
-Dada a dispersão do gráfico e como o p-valor é menor do que 0,05, é possível descartar a hipótese de que quanto mais antiga a data de criação do estado mais propenso ele é a promover mudanças constitucionais. 
+
+
+
+Dada a dispersão do gráfico e como o p-valor é menor do que 0,05, é possível descartar a hipótese de que quanto mais antiga a data de criação do estado mais mudanças constitucionais ele promove. 
 
 ## Análise das mudanças constitucionais a partir do Índice de Mudança Proporcional dos Poderes ####
 
@@ -526,6 +533,7 @@ constituicoes_poderes_grafico5 %>%ggplot(aes(x= constitution_year, y= valores, g
 
 
 
+
 Analisando o gráfico é possível identificar tendência a crescimento da participação constitucional dos poderes no tangente à quantidade de palavras referentes a eles.
 
 ### Gráfico 9 - Poderes pelo ano da Constituição ####
@@ -544,6 +552,7 @@ constituicoes_poderes %>%
         axis.title.x = element_text(size = 10),
         axis.title.y = element_text(size = 10)) #definindo o tamanho das fontes dos textos dos eixos
 ```
+
 
 
 
@@ -571,15 +580,15 @@ psych::alpha(tabela_para_alpha, check.keys = TRUE)
 alpha1 <- psych::alpha(tabela_para_alpha, check.keys = TRUE)
 ```
 
-O alpha de interesse é o demonstrado na seção "Reliability analysis" no valor disposto no "raw_alpha". O valor obtido na mensuração é de 0.83. O coficiente Alpha de Cronbach varia entre 0 e 1. Quanto mais próximo de 1, maior consistência interna o índice apresenta. Com o valor obtido, é possível verificar que o grau de consistência interna é bom. Ou seja, é boa a relação entre as variáveis relativas aos Três Poderes. 
+O alpha de interesse é o demonstrado na seção "Reliability analysis" no valor disposto no "raw_alpha". O valor obtido na mensuração é de aproximadamente 0.83. O coficiente Alpha de Cronbach varia entre 0 e 1. Quanto mais próximo de 1, maior consistência interna o índice apresenta. Com o valor obtido, é possível verificar que o grau de consistência interna é bom. Ou seja, é boa a relação entre as variáveis relativas aos Três Poderes. 
 
 # Conclusões ####
 
 - A partir das análises, identificamos que:
 1. A variação temporal e o número total de palavras influenciam nas mudanças constitucionais na medida em que, como observado, a quantidade de palavras nas constituições tende a crescer ao longo do tempo.
 2. O Alabama é um outlier na medida em que dispõe de um total de palavras absurdamente maior do que qualquer outro estado.
-3. Los Angeles é o estado mais propenso a mudanças constitucionais, a partir do histórico da quantidade de constituições já elaboradas no Estado. Por outro lado, temos 18 Estados que tiveram apenas duas constituições, apresentando menor propensão a mudança constitucional.
-4. O ano de criação do estado aparenta não influenciar na propensão a mudança constitucional.
+3. O histórico da quantidade de constituições já elaboradas no Estado ajuda a compreender as mudanças constitucionais, ao ponto em que alguns estados como Los Angeles tiveram um grande número de constituintes enquanto outros estados tiveram apenas duas. Para explorar melhor esses dados, sugerimos pesquisas qualitativas, a fim de identificar fatores políticos, econômicos e sociais que possam ter levado a essas diferenças no total de constituições de cada estado.
+4. O ano de criação do estado aparenta não influenciar nas mudanças constitucionais.
 5. Há uma tendência de crescimento da regulamentação dos três poderes na medida em que tanto os índices de mudança proporcional dos poderes quanto o total de palavras abordando o assunto evidenciam essa mudança.
 
 - Ademais, identificamos que as variáveis relativas aos três poderes estão bem relacionadas, fortalecendo a hipótese de que há uma tendência ao aumento de regras formais por meio das constituições voltadas aos Três Poderes.
