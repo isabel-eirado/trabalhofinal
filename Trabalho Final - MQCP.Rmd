@@ -384,7 +384,7 @@ const_eua_painel %>%
 ```
 
 
-1. A partir do Gráfico percebemos que Los Angeles é o Estado com o maior número de constituições, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais. São eles: Alaska, Arizona, Colorado, Hawaii, Idaho, Kansas, Maine, Massachusetts, Minnesota, Nevada, New Mexico, North Dakota, Oklahoma, Oregon, South Dakota, Utah, Wisconsin, Wyoming. 
+1. A partir do Gráfico percebemos que Louisiana é o Estado com o maior número de constituições, enquanto diversos outros estados apresentam apenas duas mudanças constitucionais. São eles: Alaska, Arizona, Colorado, Hawaii, Idaho, Kansas, Maine, Massachusetts, Minnesota, Nevada, New Mexico, North Dakota, Oklahoma, Oregon, South Dakota, Utah, Wisconsin, Wyoming. 
 
 2. Enquanto a Califórnia figura como o estado com o maior desvio padrão entre as médias observadas nas estados, o mesmo não se observa no quantitativo das mudanças constitucionais. O estado tem uma posição mediana, mudando suas normas constitucionais apenas 4 vezes. 
 
